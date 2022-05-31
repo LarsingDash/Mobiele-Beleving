@@ -1,6 +1,6 @@
 package com.example.mobielebeleving;
 
-public class country {
+public class Land {
 String name;
 int points;
 
