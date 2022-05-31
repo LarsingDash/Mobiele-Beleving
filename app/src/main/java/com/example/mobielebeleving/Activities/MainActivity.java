@@ -1,8 +1,10 @@
-package com.example.mobielebeleving;
+package com.example.mobielebeleving.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.mobielebeleving.R;
 
 public class MainActivity extends AppCompatActivity {
 
