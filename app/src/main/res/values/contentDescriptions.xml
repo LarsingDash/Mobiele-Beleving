@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loading_screen_photo">Loading screen photo</string>
+    <string name="games_button">gamesButton</string>
+    <string name="leaderBoard_button">leaderboardButton</string>
+    <string name="profile_button">profileButton</string>
+</resources>

@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobieleBeleving">
         <activity
+            android:name=".Activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.GamesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LeaderboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
