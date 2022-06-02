@@ -43,15 +43,9 @@ public class MenuBar extends LinearLayout {
         profileButton.setMinimumWidth(width);
         addView(profileButton);
 
-        gamesButton.setOnClickListener(view -> {
-            click(context, GamesActivity.class);
-        });
-        leaderboardButton.setOnClickListener(view -> {
-            click(context, LeaderboardActivity.class);
-        });
-        profileButton.setOnClickListener(view -> {
-            click(context, ProfileActivity.class);
-        });
+        gamesButton.setOnClickListener(view -> click(context, GamesActivity.class));
+        leaderboardButton.setOnClickListener(view -> click(context, LeaderboardActivity.class));
+        profileButton.setOnClickListener(view -> click(context, ProfileActivity.class));
     }
 
     private void click(Context context, Class<? extends Activity> target) {
