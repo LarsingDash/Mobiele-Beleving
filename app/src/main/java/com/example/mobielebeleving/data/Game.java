@@ -4,13 +4,23 @@ import android.location.Location;
 import android.media.Image;
 
 public class Game {
-    String name;
-    String attractie;
-    Image image;
-    int timer;
-    String description;
-    int amountOfPoints;
-    Location location;
+    private String name;
+    private String attraction;
+    private Image image;
+    private int timer;
+    private String description;
+    private int amountOfPoints;
+    private Location location;
+
+    public Game(String name, String attraction, Image image, int timer, String description, int amountOfPoints, Location location) {
+        this.name = name;
+        this.attraction = attraction;
+        this.image = image;
+        this.timer = timer;
+        this.description = description;
+        this.amountOfPoints = amountOfPoints;
+        this.location = location;
+    }
 
     public String getName() {
         return name;
@@ -20,12 +30,12 @@ public class Game {
         this.name = name;
     }
 
-    public String getAttractie() {
-        return attractie;
+    public String getAttraction() {
+        return attraction;
     }
 
-    public void setAttractie(String attractie) {
-        this.attractie = attractie;
+    public void setAttraction(String attraction) {
+        this.attraction = attraction;
     }
 
     public Image getImage() {

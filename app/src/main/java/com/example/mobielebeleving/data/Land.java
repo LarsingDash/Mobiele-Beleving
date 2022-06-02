@@ -1,8 +1,13 @@
 package com.example.mobielebeleving.data;
 
 public class Land {
-String name;
-int points;
+    private String name;
+    private int points;
+
+    public Land(String name, int points) {
+        this.name = name;
+        this.points = points;
+    }
 
     public String getName() {
         return name;

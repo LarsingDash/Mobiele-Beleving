@@ -4,8 +4,13 @@ import android.graphics.Color;
 import android.media.Image;
 
 public class ArtStyle {
-    Image image;
-    Color color;
+    private Image image;
+    private Color color;
+
+    public ArtStyle(Image image, Color color) {
+        this.image = image;
+        this.color = color;
+    }
 
     public Image getImage() {
         return image;
