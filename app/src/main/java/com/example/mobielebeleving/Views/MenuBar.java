@@ -1,4 +1,4 @@
-package com.example.mobielebeleving.Activities.Views;
+package com.example.mobielebeleving.Views;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

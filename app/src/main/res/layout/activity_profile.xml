@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ProfileActivity">
 
-    <com.example.mobielebeleving.Activities.Views.MenuBar
+    <com.example.mobielebeleving.Views.MenuBar
         android:layout_width="match_parent"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"

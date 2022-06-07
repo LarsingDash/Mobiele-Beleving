@@ -1,6 +1,8 @@
-package com.example.mobielebeleving.Activities.Views;
+package com.example.mobielebeleving.Views;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -9,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobielebeleving.Activities.DetailActivity;
 import com.example.mobielebeleving.R;
 import com.example.mobielebeleving.data.Game;
 
@@ -41,20 +43,23 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onBindViewHolder(@NonNull GameViewHolder holder, int position) {
-        holder.photo.setImageDrawable(games.get(position).getImage());
-        holder.name.setText(games.get(position).getName());
-        holder.attraction.setText(games.get(position).getAttraction());
+        Game game = games.get(position);
 
-        holder.layout.setOnClickListener(view -> {
-            Toast.makeText(context, games.get(position).getName() + " Detail Scherm", Toast.LENGTH_SHORT).show();
-        });
-        holder.button.setOnClickListener(view -> {
-            Toast.makeText(context, games.get(position).getName() + " Detail Scherm", Toast.LENGTH_SHORT).show();
-        });
+        holder.photo.setImageDrawable(game.getImage());
+        holder.name.setText(game.getName());
+        holder.attraction.setText(game.getAttraction());
+
+        holder.layout.setOnClickListener(view -> click(position));
+        holder.button.setOnClickListener(view -> click(position));
 
         DisplayMetrics metrics = new DisplayMetrics();
         context.getDisplay().getMetrics(metrics);
         holder.layout.setMinHeight((metrics.heightPixels - 200) / getItemCount());
+    }
+
+    private void click(int position) {
+        context.startActivity(new Intent(context, DetailActivity.class).putExtra("index", position));
+        ((Activity) context).finish();
     }
 
     @Override
@@ -66,7 +71,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
         }
     }
 
-    public class GameViewHolder extends RecyclerView.ViewHolder {
+    public static class GameViewHolder extends RecyclerView.ViewHolder {
         ImageView photo;
         TextView name;
         TextView attraction;

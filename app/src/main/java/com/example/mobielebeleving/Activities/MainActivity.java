@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void makeGames() {
+        games.clear();
+
         games.add(new Game("Festival Overal",
                 "Festival Overal",
                 getDrawable(R.drawable.ic_launcher_background),

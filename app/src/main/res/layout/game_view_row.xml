@@ -20,6 +20,7 @@
 
             <ImageView
                 android:id="@+id/gamePhoto"
+                android:contentDescription="@string/game_preview_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +52,7 @@
                 android:id="@+id/gameButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="Bekijk details."
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/gameAttraction"
