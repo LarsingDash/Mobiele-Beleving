@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 counter[0] += 1;
 
-                if (counter[0] == 3) {
+                if (counter[0] == 1) {
                     startActivity(new Intent(MainActivity.this, LeaderboardActivity.class));
                     finish();
                 }
