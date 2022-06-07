@@ -5,4 +5,5 @@
     <string name="games_button">gamesButton</string>
     <string name="leaderBoard_button">leaderboardButton</string>
     <string name="profile_button">profileButton</string>
+    <string name="game_description">gameDescription</string>
 </resources>

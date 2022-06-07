@@ -1,4 +1,4 @@
-package com.example.mobielebeleving.Activities;
+package com.example.mobielebeleving.Activities.Views;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,6 +13,9 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.example.mobielebeleving.Activities.GamesActivity;
+import com.example.mobielebeleving.Activities.LeaderboardActivity;
+import com.example.mobielebeleving.Activities.ProfileActivity;
 import com.example.mobielebeleving.R;
 
 public class MenuBar extends LinearLayout {

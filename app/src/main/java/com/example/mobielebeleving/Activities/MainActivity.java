@@ -1,22 +1,28 @@
 package com.example.mobielebeleving.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobielebeleving.R;
+import com.example.mobielebeleving.data.Game;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    public static ArrayList<Game> games = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        makeGames();
 
         final int[] counter = {0};
         Timer timer = new Timer();
@@ -33,7 +39,27 @@ public class MainActivity extends AppCompatActivity {
         }, 0, 1000);
     }
 
-    public void test() {
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void makeGames() {
+        games.add(new Game("Festival Overal",
+                "Festival Overal",
+                getDrawable(R.drawable.ic_launcher_background),
+                "yes",
+                10,
+                new Point(0, 0)));
+
+        games.add(new Game("Johan en de Eenhoorn",
+                "Johan en de Eenhoorn",
+                getDrawable(R.drawable.ic_launcher_background),
+                "yes",
+                10,
+                new Point(0, 0)));
+
+        games.add(new Game("Droomreis",
+                "Droomreis",
+                getDrawable(R.drawable.ic_launcher_background),
+                "yes",
+                10,
+                new Point(0, 0)));
     }
 }
