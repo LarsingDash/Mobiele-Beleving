@@ -30,10 +30,12 @@ public class MenuBar extends LinearLayout {
         setOrientation(LinearLayout.HORIZONTAL);
         setBackgroundColor(getResources().getColor(R.color.purple_700));
 
+        //Define width to spread out the buttons
         DisplayMetrics metrics = new DisplayMetrics();
         context.getDisplay().getMetrics(metrics);
         int width = metrics.widthPixels / 3;
 
+        //Define attributes of all buttons
         ImageView gamesButton = new ImageView(context, attrs);
         gamesButton.setImageDrawable(context.getDrawable(R.drawable.ic_launcher_background));
         gamesButton.setMinimumWidth(width);
@@ -49,6 +51,7 @@ public class MenuBar extends LinearLayout {
         profileButton.setMinimumWidth(width);
         addView(profileButton);
 
+        //Click actions
         gamesButton.setOnClickListener(view -> {
             click(context, GamesActivity.class);
             Objects.requireNonNull(MainActivity.getUser().getAchievements().get("ac3")).collect(false);
@@ -58,6 +61,7 @@ public class MenuBar extends LinearLayout {
     }
 
     private void click(Context context, Class<? extends Activity> target) {
+        //Directing to the targeted Activity
         if (context.getClass() == target) return;
 
         context.startActivity(new Intent(context, target));

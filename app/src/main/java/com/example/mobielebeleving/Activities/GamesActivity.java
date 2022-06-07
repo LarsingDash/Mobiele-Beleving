@@ -15,6 +15,7 @@ public class GamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
 
+        //Binding RecyclerView
         RecyclerView recyclerView = findViewById(R.id.gamesView);
         GameViewAdapter adapter = new GameViewAdapter(this, MainActivity.games);
 

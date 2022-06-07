@@ -13,8 +13,6 @@ import com.example.mobielebeleving.Data.User;
 import com.example.mobielebeleving.R;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private static boolean firstTime = true;
@@ -28,28 +26,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dir = getFilesDir().getAbsolutePath();
-
+        //Actions that will only be performed on a full startup
         if (firstTime) {
             firstTime = false;
 
+            //Path of appFiles, used for saving achievements
+            dir = getFilesDir().getAbsolutePath();
+            //Using Settings to obtain the deviceID
             user = new User(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
             makeGames();
         }
 
-        final int[] counter = {0};
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                counter[0] += 1;
-
-                if (counter[0] == 1) {
-                    startActivity(new Intent(MainActivity.this, LeaderboardActivity.class));
-                    finish();
-                }
-            }
-        }, 0, 1000);
+        //Start LeaderboardActivity after all startup tasks are completed
+        startActivity(new Intent(MainActivity.this, LeaderboardActivity.class));
+        finish();
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

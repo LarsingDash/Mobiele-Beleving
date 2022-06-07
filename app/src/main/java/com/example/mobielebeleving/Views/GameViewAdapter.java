@@ -35,6 +35,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
     @NonNull
     @Override
     public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Inflate predefined layout to context-size
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.game_view_row, parent, false);
         return new GameViewHolder(view);
@@ -45,6 +46,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
     public void onBindViewHolder(@NonNull GameViewHolder holder, int position) {
         Game game = games.get(position);
 
+        //Set attributes for all views according to the game
         holder.photo.setImageDrawable(game.getImage());
         holder.name.setText(game.getName());
         holder.attraction.setText(game.getAttraction());
@@ -52,12 +54,14 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
         holder.layout.setOnClickListener(view -> click(position));
         holder.button.setOnClickListener(view -> click(position));
 
+        //Spread out items - todo experiment if I can use the inflater to get accurate dimensions
         DisplayMetrics metrics = new DisplayMetrics();
         context.getDisplay().getMetrics(metrics);
         holder.layout.setMinHeight((metrics.heightPixels - 200) / getItemCount());
     }
 
     private void click(int position) {
+        //Start DetailActivity
         context.startActivity(new Intent(context, DetailActivity.class).putExtra("index", position));
         ((Activity) context).finish();
     }
@@ -81,6 +85,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
         public GameViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            //Find all views
             photo = itemView.findViewById(R.id.gamePhoto);
             name = itemView.findViewById(R.id.gameName);
             attraction = itemView.findViewById(R.id.gameAttraction);

@@ -16,12 +16,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-//        RecyclerView recyclerView = findViewById(R.id.detailView);
-//        DetailViewAdapter adapter = new DetailViewAdapter(this, MainActivity.games.get(getIntent().getExtras().getInt("index")));
-//
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        //Settings attributes for all views according to the game
         Game game = MainActivity.games.get(getIntent().getExtras().getInt("index"));
         ((ImageView) findViewById(R.id.detailGamePhoto)).setImageDrawable(game.getImage());
         ((TextView) findViewById(R.id.detailGameName)).setText(game.getName());
