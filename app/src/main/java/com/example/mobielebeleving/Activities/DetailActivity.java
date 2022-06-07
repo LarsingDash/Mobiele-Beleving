@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobielebeleving.R;
-import com.example.mobielebeleving.data.Game;
+import com.example.mobielebeleving.Data.Game;
 
 public class DetailActivity extends AppCompatActivity {
 

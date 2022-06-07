@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobielebeleving.Activities.DetailActivity;
 import com.example.mobielebeleving.R;
-import com.example.mobielebeleving.data.Game;
+import com.example.mobielebeleving.Data.Game;
 
 import java.util.ArrayList;
 

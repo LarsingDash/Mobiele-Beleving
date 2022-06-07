@@ -1,4 +1,4 @@
-package com.example.mobielebeleving.data;
+package com.example.mobielebeleving.Data;
 
 public class Land {
     private String name;

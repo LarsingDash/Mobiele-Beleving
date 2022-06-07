@@ -1,4 +1,4 @@
-package com.example.mobielebeleving.data;
+package com.example.mobielebeleving.Data;
 
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;

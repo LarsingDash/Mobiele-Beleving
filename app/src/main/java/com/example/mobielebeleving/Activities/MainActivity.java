@@ -4,25 +4,38 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mobielebeleving.Data.Game;
+import com.example.mobielebeleving.Data.User;
 import com.example.mobielebeleving.R;
-import com.example.mobielebeleving.data.Game;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    private static boolean firstTime = true;
     public static ArrayList<Game> games = new ArrayList<>();
+    private static User user;
+    public static String dir;
 
+    @SuppressLint("HardwareIds")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        makeGames();
+        dir = getFilesDir().getAbsolutePath();
+
+        if (firstTime) {
+            firstTime = false;
+
+            user = new User(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+            makeGames();
+        }
 
         final int[] counter = {0};
         Timer timer = new Timer();
@@ -41,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void makeGames() {
-        games.clear();
-
         games.add(new Game("Festival Overal",
                 "Festival Overal",
                 getDrawable(R.drawable.ic_launcher_background),
@@ -63,5 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 "yes",
                 10,
                 new Point(0, 0)));
+    }
+
+    public static User getUser() {
+        return user;
     }
 }

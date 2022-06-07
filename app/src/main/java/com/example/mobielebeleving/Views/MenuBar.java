@@ -15,8 +15,11 @@ import androidx.annotation.RequiresApi;
 
 import com.example.mobielebeleving.Activities.GamesActivity;
 import com.example.mobielebeleving.Activities.LeaderboardActivity;
+import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Activities.ProfileActivity;
 import com.example.mobielebeleving.R;
+
+import java.util.Objects;
 
 public class MenuBar extends LinearLayout {
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -46,7 +49,10 @@ public class MenuBar extends LinearLayout {
         profileButton.setMinimumWidth(width);
         addView(profileButton);
 
-        gamesButton.setOnClickListener(view -> click(context, GamesActivity.class));
+        gamesButton.setOnClickListener(view -> {
+            click(context, GamesActivity.class);
+            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("ac3")).collect(false);
+        });
         leaderboardButton.setOnClickListener(view -> click(context, LeaderboardActivity.class));
         profileButton.setOnClickListener(view -> click(context, ProfileActivity.class));
     }
