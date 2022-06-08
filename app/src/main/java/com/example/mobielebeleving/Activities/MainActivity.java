@@ -56,29 +56,29 @@ public class MainActivity extends AppCompatActivity {
 
     private void makeIcons() {
         icons.put(1, new Icon(1, AppCompatResources.getDrawable(MainActivity.context, R.drawable.test_icon)));
-        icons.put(2, new Icon(2, AppCompatResources.getDrawable(MainActivity.context, R.drawable.test_icon)));
-        icons.put(3, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.test_icon)));
+        icons.put(2, new Icon(2, AppCompatResources.getDrawable(MainActivity.context, R.drawable.games_icon)));
+        icons.put(3, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.ic_launcher_background)));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void makeGames() {
         games.add(new Game("Festival Overal",
                 "Festival Overal",
-                getDrawable(R.drawable.ic_launcher_background),
+                getDrawable(R.drawable.games_icon),
                 "yes",
                 10,
                 new Point(0, 0)));
 
         games.add(new Game("Johan en de Eenhoorn",
                 "Johan en de Eenhoorn",
-                getDrawable(R.drawable.ic_launcher_background),
+                getDrawable(R.drawable.leaderboard_icon),
                 "yes",
                 10,
                 new Point(0, 0)));
 
         games.add(new Game("Droomreis",
                 "Droomreis",
-                getDrawable(R.drawable.ic_launcher_background),
+                getDrawable(R.drawable.profile_icon),
                 "yes",
                 10,
                 new Point(0, 0)));

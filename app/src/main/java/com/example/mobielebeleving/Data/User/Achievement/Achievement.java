@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Activities.ProfileActivity;
+import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.Pronoun;
 import com.example.mobielebeleving.Data.User.Title;
 import com.example.mobielebeleving.Data.User.User;
@@ -40,8 +41,10 @@ public class Achievement {
             for (AchievementTarget target : targets) {
                 if (target.getClass() == Pronoun.class) {
                     ProfileActivity.availablePronouns.add((Pronoun) target);
-                } else {
+                } else if (target.getClass() == Title.class) {
                     ProfileActivity.availableTitles.add((Title) target);
+                } else {
+                    ProfileActivity.availableIcons.add((Icon) target);
                 }
             }
 
