@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ProfileActivity">
+
+    <com.example.mobielebeleving.Views.MenuBar
+        android:id="@+id/menuBar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/userID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userID"
+        app:layout_constraintBottom_toTopOf="@+id/menuBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/profileIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/profile_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/profilePronoun"
+        app:srcCompat="@drawable/test_icon" />
+
+    <Spinner
+        android:id="@+id/profilePronoun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:contentDescription="profilePronounSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileIcon"
+        app:layout_constraintTop_toTopOf="@+id/profileIcon" />
+
+    <Spinner
+        android:id="@+id/profileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="profileTitleSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileIcon"
+        app:layout_constraintBottom_toBottomOf="@id/profileIconNext"/>
+
+    <Button
+        android:id="@+id/profileIconPrevious"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="L"
+        app:layout_constraintEnd_toStartOf="@id/profileIconNext"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
+
+    <Button
+        android:id="@+id/profileIconNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="R"
+        app:layout_constraintEnd_toEndOf="@+id/profileIcon"
+        app:layout_constraintStart_toEndOf="@id/profileIconPrevious"
+        app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
+</androidx.constraintlayout.widget.ConstraintLayout>
