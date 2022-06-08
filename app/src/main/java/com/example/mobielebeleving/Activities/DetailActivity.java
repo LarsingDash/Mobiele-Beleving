@@ -15,6 +15,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        getWindow().setWindowAnimations(0);
 
         //Settings attributes for all views according to the game
         Game game = MainActivity.games.get(getIntent().getExtras().getInt("index"));

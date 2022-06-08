@@ -14,6 +14,7 @@ public class GamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
+        getWindow().setWindowAnimations(0);
 
         //Binding RecyclerView
         RecyclerView recyclerView = findViewById(R.id.gamesView);

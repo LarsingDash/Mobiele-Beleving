@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setWindowAnimations(0);
+
 
         context = getApplication().getBaseContext();
         //Actions that will only be performed on a full startup

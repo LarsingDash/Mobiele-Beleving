@@ -29,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getWindow().setWindowAnimations(0);
 
         user = MainActivity.getUser();
 
