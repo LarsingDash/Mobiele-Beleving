@@ -28,7 +28,7 @@ public class MenuBar extends LinearLayout {
     public MenuBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setOrientation(LinearLayout.HORIZONTAL);
-        setBackgroundColor(getResources().getColor(R.color.purple_700));
+        setBackgroundColor(getResources().getColor(R.color.menuBar));
 
         //Define width to spread out the buttons
         DisplayMetrics metrics = new DisplayMetrics();
@@ -37,27 +37,30 @@ public class MenuBar extends LinearLayout {
 
         //Define attributes of all buttons
         ImageView gamesButton = new ImageView(context, attrs);
-        gamesButton.setImageDrawable(context.getDrawable(R.drawable.ic_launcher_background));
+        gamesButton.setImageDrawable(context.getDrawable(R.drawable.games_icon));
         gamesButton.setMinimumWidth(width);
         addView(gamesButton);
 
         ImageView leaderboardButton = new ImageView(context, attrs);
-        leaderboardButton.setImageDrawable(context.getDrawable(R.drawable.ic_launcher_background));
+        leaderboardButton.setImageDrawable(context.getDrawable(R.drawable.leaderboard_icon));
         leaderboardButton.setMinimumWidth(width);
         addView(leaderboardButton);
 
         ImageView profileButton = new ImageView(context, attrs);
-        profileButton.setImageDrawable(context.getDrawable(R.drawable.ic_launcher_background));
+        profileButton.setImageDrawable(context.getDrawable(R.drawable.profile_icon));
         profileButton.setMinimumWidth(width);
         addView(profileButton);
 
         //Click actions
         gamesButton.setOnClickListener(view -> {
             click(context, GamesActivity.class);
-            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("ac3")).collect(false);
+            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Debug")).collect(false);
         });
         leaderboardButton.setOnClickListener(view -> click(context, LeaderboardActivity.class));
-        profileButton.setOnClickListener(view -> click(context, ProfileActivity.class));
+        profileButton.setOnClickListener(view -> {
+            click(context, ProfileActivity.class);
+            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Profiel")).collect(false);
+        });
     }
 
     private void click(Context context, Class<? extends Activity> target) {
