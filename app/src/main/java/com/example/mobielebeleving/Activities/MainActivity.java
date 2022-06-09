@@ -19,8 +19,11 @@ import com.example.mobielebeleving.R;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,13 +114,32 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     // Something went wrong e.g. connection timeout or firewall problems
-                    Log.d(Settings.TAG, "onFailure");
+                    Log.d(Settings.TAG, "onFailure" + exception);
 
                 }
             });
         } catch (MqttException e) {
             e.printStackTrace();
         }
+        Settings.mqttAndroidClient.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                // Check what topic the message is for and handle accordingly
+                if (topic.equals(Settings.topicFabelwoud)) {
+                    System.out.println(message.toString());
+                } else if (topic.equals("larstest/lars")) {
+                    System.out.println(message.toString());
+                }
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+            }
+        });
     }
 
     public static User getUser() {
