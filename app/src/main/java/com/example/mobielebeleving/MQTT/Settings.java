@@ -10,6 +10,8 @@ public class Settings {
     public static final String username = "";
     public static final String password = "";
 
+    public static final String TAG = "MQTT Debug";
+
     // Creation of unique client ID for MQTT Server connection
     public static final String clientID = "esstelstrijd_" + UUID.randomUUID().toString();
     public static final int qualityOfService = 0;

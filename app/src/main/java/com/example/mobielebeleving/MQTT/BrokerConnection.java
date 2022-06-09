@@ -10,7 +10,7 @@ public class BrokerConnection {
     public static void connectToBroker(MqttAndroidClient client, String clientId) {
         // Set up connection options for the connection to the MQTT broker
         MqttConnectOptions options = new MqttConnectOptions();
-//        options.setAutomaticReconnect(true);
+        options.setAutomaticReconnect(true);
         options.setCleanSession(false);
         options.setUserName(Settings.username);
         options.setPassword(Settings.password.toCharArray());

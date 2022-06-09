@@ -1,11 +1,12 @@
 package com.example.mobielebeleving.Activities;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -13,7 +14,13 @@ import androidx.appcompat.content.res.AppCompatResources;
 import com.example.mobielebeleving.Data.Game;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
+import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.R;
+
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().setWindowAnimations(0);
 
+        MQTTConnect();
 
         context = getApplication().getBaseContext();
         //Actions that will only be performed on a full startup
@@ -48,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             makeGames();
 
             //Using Settings to obtain the deviceID
-            user = new User(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+            user = new User(android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID));
         }
 
         //Start LeaderboardActivity after all startup tasks are completed
@@ -84,6 +92,32 @@ public class MainActivity extends AppCompatActivity {
                 "yes",
                 10,
                 new Point(0, 0)));
+    }
+
+    private void MQTTConnect() {
+        Settings.mqttAndroidClient =
+                new MqttAndroidClient(this.getApplicationContext(), Settings.brokerHostUrl,
+                        Settings.clientID);
+
+        try {
+            IMqttToken token = Settings.mqttAndroidClient.connect();
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // We are connected
+                    Log.d(Settings.TAG, "onSuccess");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    // Something went wrong e.g. connection timeout or firewall problems
+                    Log.d(Settings.TAG, "onFailure");
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
 
     public static User getUser() {
