@@ -15,6 +15,8 @@ import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.Pronoun;
 import com.example.mobielebeleving.Data.User.Title;
 import com.example.mobielebeleving.Data.User.User;
+import com.example.mobielebeleving.MQTT.Settings;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
 
 import java.util.ArrayList;
@@ -61,15 +63,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Next button
         findViewById(R.id.profileIconNext).setOnClickListener(view -> {
-            //Get index of currently selected Icon - 1
-            int i = availableIcons.indexOf(user.getIcon()) + 1;
-
-            //Make sure the index loops in the array
-            if (i == availableIcons.size()) i = 0;
-
-            //Set the new Icon
-            user.setIcon(availableIcons.get(i));
-            icon.setImageDrawable(user.getIcon().getIcon());
+//            //Get index of currently selected Icon - 1
+//            int i = availableIcons.indexOf(user.getIcon()) + 1;
+//
+//            //Make sure the index loops in the array
+//            if (i == availableIcons.size()) i = 0;
+//
+//            //Set the new Icon
+//            user.setIcon(availableIcons.get(i));
+//            icon.setImageDrawable(user.getIcon().getIcon());
+            TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable);
         });
     }
 

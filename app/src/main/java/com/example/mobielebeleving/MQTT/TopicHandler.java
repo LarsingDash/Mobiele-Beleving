@@ -10,6 +10,7 @@ public class TopicHandler {
             // Try to subscribe to the topic
         try {
             IMqttToken token = client.subscribe(topic, Settings.qualityOfService);
+            System.out.println("Succesvol");
         } catch (MqttException e) {
             e.printStackTrace();
         }

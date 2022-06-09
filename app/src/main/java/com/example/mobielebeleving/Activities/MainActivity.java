@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -129,13 +130,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 // Check what topic the message is for and handle accordingly
+                switch (topic) {
+                    //Topic check for each land's points
+                    case Settings.topicFabelwoudPoints:
+                        System.out.println("TO-DO");
+                        break;
+
+                    case Settings.topicLegendelandPoints:
+                        System.out.println("TO-DO");
+                        break;
+
+                    case Settings.topicStoerlandPoints:
+                        System.out.println("TO-DO");
+                        break;
+
+                    //Topic check for Droomreis topics
+                    case Settings.topicDroomIsAvailable:
+                        if (message.toString().equals("yes")) {
+                            System.out.println("Entering");
+                            Toast toast = Toast.makeText(getApplication().getBaseContext(), "Game is already in use.", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+
+                        }
+                }
+
+
+
+
                 if (topic.equals(Settings.topicFabelwoudPoints)) {
                     System.out.println(message.toString());
                 } else if (topic.equals("larstest/lars")) {
                     System.out.println(message.toString());
                 }
             }
-
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
             }
