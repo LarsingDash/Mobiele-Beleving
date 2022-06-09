@@ -6,5 +6,6 @@ public enum Title implements AchievementTarget {
     Ridder,
     Troll,
     Fee,
-    Clown
+    Clown,
+    Avonturier
 }

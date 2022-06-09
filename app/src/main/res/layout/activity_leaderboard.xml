@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.LeaderboardActivity">
 
     <com.example.mobielebeleving.Views.MenuBar
-        android:id="@+id/menuBar2"
+        android:id="@+id/menuBar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,13 +17,138 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/leaderMyPoints"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="Mijn bijdrage: 0"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaderLegende"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/legende"
+        app:layout_constraintBottom_toTopOf="@id/leaderLegendeIcon"
+        app:layout_constraintTop_toBottomOf="@id/leaderLegendeCounter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/leaderStoer"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaderStoer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/stoer"
+        app:layout_constraintBottom_toTopOf="@id/leaderStoerIcon"
+        app:layout_constraintTop_toBottomOf="@id/leaderStoerCounter"
+        app:layout_constraintStart_toEndOf="@id/leaderLegende"
+        app:layout_constraintEnd_toStartOf="@id/leaderFabel">
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaderFabel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/fabel"
+        app:layout_constraintBottom_toTopOf="@id/leaderStoerIcon"
+        app:layout_constraintTop_toBottomOf="@id/leaderFabelCounter"
+        app:layout_constraintStart_toEndOf="@id/leaderStoer"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/leaderLegendeCounter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/leaderLegende"
+        app:layout_constraintEnd_toEndOf="@id/leaderLegende"
+        app:layout_constraintTop_toBottomOf="@id/leaderMyPoints"/>
+
+    <TextView
+        android:id="@+id/leaderStoerCounter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/leaderStoer"
+        app:layout_constraintEnd_toEndOf="@id/leaderStoer"
+        app:layout_constraintTop_toBottomOf="@id/leaderMyPoints"/>
+
+    <TextView
+        android:id="@+id/leaderFabelCounter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/leaderFabel"
+        app:layout_constraintEnd_toEndOf="@id/leaderFabel"
+        app:layout_constraintTop_toBottomOf="@id/leaderMyPoints" />
+
+    <ImageView
+        android:id="@+id/leaderLegendeIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Leaderboard"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@+id/menuBar2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginBottom="15dp"
+        android:contentDescription="leaderboardIcon"
+        app:layout_constraintEnd_toEndOf="@id/leaderLegende"
+        app:layout_constraintStart_toStartOf="@id/leaderLegende"
+        app:layout_constraintBottom_toTopOf="@id/menuBar"
+        app:srcCompat="@drawable/test_icon" />
+
+    <ImageView
+        android:id="@+id/leaderStoerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="leaderboardIcon"
+        app:layout_constraintEnd_toEndOf="@id/leaderStoer"
+        app:layout_constraintStart_toStartOf="@id/leaderStoer"
+        app:layout_constraintBottom_toTopOf="@id/menuBar"
+        app:srcCompat="@drawable/test_icon" />
+    <ImageView
+        android:id="@+id/leaderFabelIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="leaderboardIcon"
+        app:layout_constraintEnd_toEndOf="@id/leaderFabel"
+        app:layout_constraintStart_toStartOf="@id/leaderFabel"
+        app:layout_constraintBottom_toTopOf="@id/menuBar"
+        app:srcCompat="@drawable/test_icon" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaderLegendeBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/leaderLegendeIcon"
+        app:layout_constraintEnd_toEndOf="@id/leaderLegendeIcon"
+        app:layout_constraintTop_toTopOf="@id/leaderLegendeIcon"
+        app:layout_constraintBottom_toBottomOf="@id/leaderLegendeIcon"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaderStoerBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/leaderStoerIcon"
+        app:layout_constraintEnd_toEndOf="@id/leaderStoerIcon"
+        app:layout_constraintTop_toTopOf="@id/leaderStoerIcon"
+        app:layout_constraintBottom_toBottomOf="@id/leaderStoerIcon"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/leaderFabelBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/leaderFabelIcon"
+        app:layout_constraintEnd_toEndOf="@id/leaderFabelIcon"
+        app:layout_constraintTop_toTopOf="@id/leaderFabelIcon"
+        app:layout_constraintBottom_toBottomOf="@id/leaderFabelIcon"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
