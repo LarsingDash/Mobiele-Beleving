@@ -33,9 +33,9 @@ public class Settings {
     public static final String topicUsers = "esstelstrijd/users/";
 
     //Topics related to Land's
-    public static final String topicLegendeland = "esstelstrijd/lands/legende";
-    public static final String topicFabelwoud = "esstelstrijd/lands/fabel";
-    public static final String topicStoerland = "esstelstrijd/lands/stoer";
+    public static final String topicLegendelandPoints = "esstelstrijd/lands/legende/points";
+    public static final String topicFabelwoudPoints = "esstelstrijd/lands/fabel/points";
+    public static final String topicStoerlandPoints = "esstelstrijd/lands/stoer/points";
 
     //MQTT Andriod Client
     public static MqttAndroidClient mqttAndroidClient;

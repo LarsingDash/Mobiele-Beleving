@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 // Check what topic the message is for and handle accordingly
-                if (topic.equals(Settings.topicFabelwoud)) {
+                if (topic.equals(Settings.topicFabelwoudPoints)) {
                     System.out.println(message.toString());
                 } else if (topic.equals("larstest/lars")) {
                     System.out.println(message.toString());
