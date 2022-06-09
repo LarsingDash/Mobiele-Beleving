@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#E8E8E8</color>
+    <color name="dark_gray">#B8B8B8</color>
     <color name="fabel">#B46FD8</color>
     <color name="stoer">#FF4545</color>
     <color name="legende">#64D257</color>

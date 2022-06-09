@@ -2,6 +2,7 @@ package com.example.mobielebeleving.Activities;
 
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ public class GamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
         getWindow().setWindowAnimations(0);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Binding RecyclerView
         RecyclerView recyclerView = findViewById(R.id.gamesView);

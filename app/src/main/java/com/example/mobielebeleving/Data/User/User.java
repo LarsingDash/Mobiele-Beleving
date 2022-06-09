@@ -2,6 +2,7 @@ package com.example.mobielebeleving.Data.User;
 
 import android.util.Log;
 
+import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Achievement.Achievement;
@@ -141,6 +142,7 @@ public class User {
 
     public void setPoints(int points) {
         this.points = points;
+        LeaderboardActivity.myPoints.setText("Mijn bijdrage: " + points);
     }
 
     public Pronoun getPronoun() {
