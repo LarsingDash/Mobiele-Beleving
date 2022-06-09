@@ -10,12 +10,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.Pronoun;
 import com.example.mobielebeleving.Data.User.Title;
 import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.R;
+import com.example.mobielebeleving.Views.AchievementsViewAdapter;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = MainActivity.getUser();
 
+        ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> user.setLand(new Land("null")));
+
         //Set initial values for Icon and UserID
         ImageView icon = findViewById(R.id.profileIcon);
         icon.setImageDrawable(user.getIcon().getIcon());
@@ -41,6 +47,13 @@ public class ProfileActivity extends AppCompatActivity {
         makeIconButtons();
         makePronounSpinner();
         makeTitleSpinner();
+
+        //Binding RecyclerView for the achievementView
+        RecyclerView recyclerView = findViewById(R.id.achievementView);
+        AchievementsViewAdapter adapter = new AchievementsViewAdapter(this, new ArrayList<>(user.getAchievements().values()));
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void makeIconButtons() {
@@ -55,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (i < 0) i = availableIcons.size() - 1;
 
             //Set the new Icon
+            Log.println(Log.DEBUG, "DEBUG", i + "");
             user.setIcon(availableIcons.get(i));
             icon.setImageDrawable(user.getIcon().getIcon());
         });
@@ -64,10 +78,12 @@ public class ProfileActivity extends AppCompatActivity {
             //Get index of currently selected Icon - 1
             int i = availableIcons.indexOf(user.getIcon()) + 1;
 
+            Log.println(Log.DEBUG, "DEBUG", "Size: " + availableIcons.size());
             //Make sure the index loops in the array
             if (i == availableIcons.size()) i = 0;
 
             //Set the new Icon
+            Log.println(Log.DEBUG, "DEBUG", "I: " + i);
             user.setIcon(availableIcons.get(i));
             icon.setImageDrawable(user.getIcon().getIcon());
         });

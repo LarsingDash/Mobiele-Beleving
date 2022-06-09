@@ -1,6 +1,7 @@
 package com.example.mobielebeleving.Activities;
 
 import android.os.Bundle;
+import android.view.ViewTreeObserver;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,5 +23,14 @@ public class GamesActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Getting the total height of the recycler view so the items can be spread out
+        recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                adapter.spreadOut(recyclerView.getHeight());
+            }
+        });
     }
 }

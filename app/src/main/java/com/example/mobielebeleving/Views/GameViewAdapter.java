@@ -3,8 +3,6 @@ package com.example.mobielebeleving.Views;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +11,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobielebeleving.Activities.DetailActivity;
-import com.example.mobielebeleving.R;
+import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Game;
+import com.example.mobielebeleving.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameViewHolder> {
     private final Context context;
     private final ArrayList<Game> games;
+
+    private final ArrayList<GameViewHolder> holders = new ArrayList<>();
 
     public GameViewAdapter(Context context, ArrayList<Game> games) {
         this.context = context;
@@ -41,10 +42,10 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
         return new GameViewHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onBindViewHolder(@NonNull GameViewHolder holder, int position) {
         Game game = games.get(position);
+        holders.add(holder);
 
         //Set attributes for all views according to the game
         holder.photo.setImageDrawable(game.getImage());
@@ -53,16 +54,19 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
 
         holder.layout.setOnClickListener(view -> click(position));
         holder.button.setOnClickListener(view -> click(position));
+    }
 
-        //Spread out items - todo experiment if I can use the inflater to get accurate dimensions
-        DisplayMetrics metrics = new DisplayMetrics();
-        context.getDisplay().getMetrics(metrics);
-        holder.layout.setMinHeight((metrics.heightPixels - 200) / getItemCount());
+    public void spreadOut(int height) {
+        //Spreading out the items
+        for (GameViewHolder holder : holders) {
+            holder.layout.setMinHeight(height / getItemCount());
+        }
     }
 
     private void click(int position) {
         //Start DetailActivity
         context.startActivity(new Intent(context, DetailActivity.class).putExtra("index", position));
+        Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Avonturier")).collect(false);
         ((Activity) context).finish();
     }
 
@@ -85,7 +89,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
         public GameViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //Find all views
+            //Finding all views
             photo = itemView.findViewById(R.id.gamePhoto);
             name = itemView.findViewById(R.id.gameName);
             attraction = itemView.findViewById(R.id.gameAttraction);
