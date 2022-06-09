@@ -14,8 +14,27 @@ public class Settings {
     public static final String clientID = "esstelstrijd_" + UUID.randomUUID().toString();
     public static final int qualityOfService = 0;
 
-    // MQTT topics to subscribe for (temporarily disabled due to runtime exceptions, cause unknown)
-    public static final String topicName = "esstelstrijd/games/";
+    // MQTT Topics every device needs to connect to.
+    //Topics related to Droomreis (short version "droom"
+    public static final String topicDroomIsAvailable = "esstelstrijd/games/droom/isAvailable";
+    public static final String topicDroomCurrentUser = "esstelstrijd/games/droom/currentUser";
 
+    //Topics related to Johan en de Eenhoorn (short version "Jede")
+    public static final String topicJedeIsAvailable = "esstelstrijd/games/jede/isAvailable";
+    public static final String topicJedeCurrentUser = "esstelstrijd/games/jede/currentUser";
+
+    //Topics related to Festival Overal (short version "Fest")
+    public static final String topicFestIsAvailable = "esstelstrijd/games/fest/isAvailable";
+    public static final String topicFestCurrentUser = "esstelstrijd/games/fest/currentUser";
+
+    //Topics related to Users
+    public static final String topicUsers = "esstelstrijd/users/";
+
+    //Topics related to Land's
+    public static final String topicLegendeland = "esstelstrijd/lands/legende";
+    public static final String topicFabelwoud = "esstelstrijd/lands/fabel";
+    public static final String topicStoerland = "esstelstrijd/lands/stoer";
+
+    //MQTT Andriod Client
     public static MqttAndroidClient mqttAndroidClient;
 }
