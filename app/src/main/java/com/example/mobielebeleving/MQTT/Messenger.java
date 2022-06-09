@@ -1,7 +1,5 @@
 package com.example.mobielebeleving.MQTT;
 
-import android.util.Log;
-
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -15,7 +13,7 @@ public class Messenger {
         try {
             // Convert the message to a UTF-8 encoded byte array
             encodedPayload = msg.getBytes("UTF-8");
-            
+
             // Store it in an MqttMessage
             MqttMessage message = new MqttMessage(encodedPayload);
 
