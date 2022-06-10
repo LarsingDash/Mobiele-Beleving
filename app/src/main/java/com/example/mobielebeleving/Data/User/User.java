@@ -185,4 +185,12 @@ public class User {
         this.land = land;
         writeUserData();
     }
+
+    public File getAchievementsFile() {
+        return achievementsFile;
+    }
+
+    public File getUserDataFile() {
+        return userDataFile;
+    }
 }

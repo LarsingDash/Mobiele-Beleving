@@ -45,6 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> {
             user.setLand(new Land("null"));
+            Log.println(Log.DEBUG, "DEBUG", "UserData file deleted: " + user.getUserDataFile().delete());
+            Log.println(Log.DEBUG, "DEBUG", "Achievements file deleted: " + user.getAchievementsFile().delete());
             Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
         });
 
