@@ -3,9 +3,6 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-            maven {
-                url "https://repo.eclipse.org/content/repositories/paho-releases/"
-            }
     }
 }
 dependencyResolutionManagement {
