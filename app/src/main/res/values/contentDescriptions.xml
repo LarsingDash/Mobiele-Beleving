@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loading_screen_photo">Loading screen photo</string>
+    <string name="games_button">gamesButton</string>
+    <string name="leaderBoard_button">leaderboardButton</string>
+    <string name="profile_button">profileButton</string>
+    <string name="game_description">gameDescription</string>
+    <string name="game_preview_photo">Game Preview Photo</string>
+    <string name="game_detail_scroll_view">gameDetailScrollView</string>
+</resources>
