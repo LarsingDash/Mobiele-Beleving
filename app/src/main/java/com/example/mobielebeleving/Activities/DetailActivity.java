@@ -25,5 +25,9 @@ public class DetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.detailGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.detailGameAttraction)).setText(game.getAttraction());
         ((TextView) findViewById(R.id.detailGameDescription)).setText(game.getDescription());
+
+        int color = MainActivity.getUser().getLand().getColor();
+        findViewById(R.id.topPart).setBackgroundColor(color);
+        findViewById(R.id.locationButton).setBackgroundColor(color);
     }
 }

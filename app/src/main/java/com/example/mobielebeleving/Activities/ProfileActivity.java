@@ -9,8 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +41,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = MainActivity.getUser();
 
-        ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> user.setLand(new Land("null")));
+        ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> {
+            user.setLand(new Land("null"));
+            Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
+        });
 
         //Set initial values for Icon and UserID
         ImageView icon = findViewById(R.id.profileIcon);
@@ -56,6 +61,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Make design according to selected land
+        ConstraintLayout userLayout = findViewById(R.id.userLayout);
+        userLayout.setBackgroundColor(user.getLand().getColor());
     }
 
     private void makeIconButtons() {
@@ -97,7 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Creating and binding the Adapter for the Spinner
         Spinner pronounSpinner = findViewById(R.id.profilePronoun);
-        ArrayAdapter<Pronoun> pronounAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, availablePronouns);
+        ArrayAdapter<Pronoun> pronounAdapter = new ArrayAdapter<>(this, R.layout.spinner_row, availablePronouns);
         pronounAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pronounSpinner.setAdapter(pronounAdapter);
 
@@ -130,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
         String target = user.getTitle().name();
         
         Spinner titleSpinner = findViewById(R.id.profileTitle);
-        ArrayAdapter<Title> titleAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, availableTitles);
+        ArrayAdapter<Title> titleAdapter = new ArrayAdapter<>(this, R.layout.spinner_row, availableTitles);
         titleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         titleSpinner.setAdapter(titleAdapter);
 

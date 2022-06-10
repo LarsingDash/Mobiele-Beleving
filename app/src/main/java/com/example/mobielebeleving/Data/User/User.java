@@ -80,11 +80,11 @@ public class User {
             //Read userData from file
             land = new Land(scanner.nextLine());
             icon = MainActivity.icons.get(Integer.parseInt(scanner.nextLine()));
-            pronoun = Pronoun.valueOf(scanner.next());
-            title = Title.valueOf(scanner.next());
+            pronoun = Pronoun.valueOf(scanner.nextLine());
+            title = Title.valueOf(scanner.nextLine());
         } catch (FileNotFoundException e) {
             land = new Land("null");
-            icon = MainActivity.icons.get(1);
+            icon = MainActivity.icons.get(0);
             pronoun = Pronoun.Dappere;
             title = Title.Ridder;
             writeUserData();
@@ -115,10 +115,10 @@ public class User {
     }
 
     private void createAchievements() {
-        achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(0), MainActivity.icons.get(1))), "Welkom!", "Start het spel op", "Reward 1"));
+        achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(1))), "Welkom!", "Start het spel op", "Reward 1"));
         achievements.put("Profiel", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Magische, Pronoun.Slimme, Title.Fee, Title.Clown, MainActivity.icons.get(2))), "Profiel", "Navigeer naar jouw profiel", "Reward 2"));
         achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "jebollemama", "Reward 3"));
-        achievements.put("Avonturier", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(3))), "Avonturier", "Bekijk de details van een spel", "Ontdekkende - Avonturier"));
+        achievements.put("Avonturier", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(0))), "Avonturier", "Bekijk de details van een spel", "Ontdekkende - Avonturier"));
         }
 
     private void printForDebug() {

@@ -16,13 +16,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
 
             <ImageView
                 android:id="@+id/gamePhoto"
                 android:contentDescription="@string/game_preview_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -33,6 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/gameAttraction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/gamePhoto"
@@ -52,7 +57,7 @@
                 android:id="@+id/gameButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bekijk details."
+                android:text="Bekijk details"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/gameAttraction"

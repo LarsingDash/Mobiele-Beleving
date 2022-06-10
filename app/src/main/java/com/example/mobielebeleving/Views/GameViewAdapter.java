@@ -54,6 +54,9 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
 
         holder.layout.setOnClickListener(view -> click(position));
         holder.button.setOnClickListener(view -> click(position));
+
+        //Change the color of the button according to the Land
+        holder.button.setBackgroundColor(MainActivity.getUser().getLand().getColor());
     }
 
     public void spreadOut(int height) {

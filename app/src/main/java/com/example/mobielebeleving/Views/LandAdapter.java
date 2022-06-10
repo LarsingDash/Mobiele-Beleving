@@ -50,6 +50,8 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
             context.startActivity(new Intent(context, LeaderboardActivity.class));
             ((Activity) context).finish();
         });
+        holder.button.setBackgroundColor(context.getResources().getColor(R.color.white));
+        holder.button.setTextColor(land.getColor());
     }
 
     @Override
