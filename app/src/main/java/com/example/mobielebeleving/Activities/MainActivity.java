@@ -86,22 +86,22 @@ public class MainActivity extends AppCompatActivity {
         games.add(new Game("Festival Overal",
                 "Festival Overal",
                 getDrawable(R.drawable.game1),
-                "yes",
-                10,
+                getResources().getString(R.string.game1story),
+                getResources().getString(R.string.game1explanation),
                 new Point(0, 0)));
 
         games.add(new Game("Johan en de Eenhoorn",
                 "Johan en de Eenhoorn",
                 getDrawable(R.drawable.game2),
-                "yes",
-                10,
+                getResources().getString(R.string.game2story),
+                getResources().getString(R.string.game2explanation),
                 new Point(0, 0)));
 
         games.add(new Game("Droomreis",
                 "Droomreis",
                 getDrawable(R.drawable.game3),
-                "yes",
-                10,
+                getResources().getString(R.string.game3story),
+                getResources().getString(R.string.game3explanation),
                 new Point(0, 0)));
     }
 

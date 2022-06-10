@@ -45,6 +45,7 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
         //Set attributes for all views according to the Land
         holder.layout.setBackgroundColor(land.getColor());
         holder.name.setText(land.getName());
+        holder.story.setText(land.getStory());
         holder.button.setOnClickListener(view -> {
             MainActivity.getUser().setLand(land);
             context.startActivity(new Intent(context, LeaderboardActivity.class));
@@ -62,6 +63,7 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
     public static class LandHolder extends RecyclerView.ViewHolder {
         ConstraintLayout layout;
         TextView name;
+        TextView story;
         Button button;
 
         public LandHolder(@NonNull View itemView) {
@@ -70,6 +72,7 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
             //Finding all views
             layout = itemView.findViewById(R.id.landLayout);
             name = itemView.findViewById(R.id.landName);
+            story = itemView.findViewById(R.id.landStory);
             button = itemView.findViewById(R.id.landChoose);
         }
     }

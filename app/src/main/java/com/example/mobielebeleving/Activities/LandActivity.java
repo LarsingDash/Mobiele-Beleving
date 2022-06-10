@@ -25,7 +25,7 @@ public class LandActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Adding all Lands
-        Collections.addAll(lands, new Land(Land.LegendeLand), new Land(Land.StoerLand), new Land(Land.Fabelwoud));
+        Collections.addAll(lands, new Land(Land.Legendeland), new Land(Land.Stoerland), new Land(Land.Fabelwoud));
 
         //Binding Adapter
         LandAdapter adapter = new LandAdapter(this, lands);

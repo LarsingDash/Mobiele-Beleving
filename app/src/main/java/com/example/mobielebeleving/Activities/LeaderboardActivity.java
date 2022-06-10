@@ -16,6 +16,10 @@ public class LeaderboardActivity extends AppCompatActivity {
     private static int highest = 0;
     private static LeaderboardActivity activity;
 
+    private static int legendeland = 0;
+    private static int stoerland = 0;
+    private static int fabelwoud = 0;
+
     public static TextView myPoints;
 
     @Override
@@ -30,11 +34,17 @@ public class LeaderboardActivity extends AppCompatActivity {
         myPoints.setBackgroundColor(MainActivity.getUser().getLand().getColor());
         myPoints.setText("Mijn bijdrage: " + MainActivity.getUser().getPoints());
 
+        //DEBUG BUTTONS
         findViewById(R.id.leaderStoerIcon).setOnClickListener(view -> MainActivity.getUser().setPoints(MainActivity.getUser().getPoints() + 1));
+        findViewById(R.id.leaderFabelIcon).setOnClickListener(view -> {
+            setBar(Land.Stoerland, 80);
+            setBar(Land.Legendeland, 50);
+            setBar(Land.Fabelwoud, 20);
+        });
 
-        setBar(Land.LegendeLand, 20);
-        setBar(Land.StoerLand, 40);
-        setBar(Land.Fabelwoud, 60);
+        setBar(Land.Legendeland, legendeland);
+        setBar(Land.Stoerland, stoerland);
+        setBar(Land.Fabelwoud, fabelwoud);
     }
 
     public static void setBar(String land, int points) {
@@ -44,16 +54,18 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         //Get the bar and counter according to the land specified
         switch (land) {
-            case Land.LegendeLand:
+            case Land.Legendeland:
                 bar = activity.findViewById(R.id.leaderLegende);
                 counter = activity.findViewById(R.id.leaderLegendeCounter);
                 background = activity.findViewById(R.id.leaderLegendeBackground);
+                legendeland = points;
                 break;
 
-            case Land.StoerLand:
+            case Land.Stoerland:
                 bar = activity.findViewById(R.id.leaderStoer);
                 counter = activity.findViewById(R.id.leaderStoerCounter);
                 background = activity.findViewById(R.id.leaderStoerBackground);
+                stoerland = points;
                 break;
 
             default:
@@ -61,6 +73,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 bar = activity.findViewById(R.id.leaderFabel);
                 counter = activity.findViewById(R.id.leaderFabelCounter);
                 background = activity.findViewById(R.id.leaderFabelBackground);
+                fabelwoud = points;
         }
 
         //Replace highest if record is beaten
@@ -83,8 +96,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                 int height = bar.getHeight();
                 double percentage = points / (double) highest;
 
+                //Calculate the distance
                 paramsCounter.setMargins(0, (int) (height - height * percentage), 0, 0);
-                counter.requestLayout();
 
                 //Set counter to score
                 counter.setText(points + "");
@@ -96,5 +109,8 @@ public class LeaderboardActivity extends AppCompatActivity {
         } else {
             background.setBackgroundColor(activity.getResources().getColor(R.color.gray));
         }
+
+        //Update the view
+        counter.requestLayout();
     }
 }

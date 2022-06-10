@@ -121,7 +121,7 @@ public class User {
     private void createAchievements() {
         achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(1))), "Welkom!", "Start het spel op", "Reward 1"));
         achievements.put("Profiel", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Magische, Pronoun.Slimme, Title.Fee, Title.Clown, MainActivity.icons.get(2))), "Profiel", "Navigeer naar jouw profiel", "Reward 2"));
-        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "jebollemama", "Reward 3"));
+        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "Debug", "Reward 3"));
         achievements.put("Avonturier", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(0))), "Avonturier", "Bekijk de details van een spel", "Ontdekkende - Avonturier"));
         }
 
