@@ -21,6 +21,8 @@ import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.Pronoun;
 import com.example.mobielebeleving.Data.User.Title;
 import com.example.mobielebeleving.Data.User.User;
+import com.example.mobielebeleving.MQTT.Settings;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
 import com.example.mobielebeleving.Views.AchievementsViewAdapter;
 
@@ -86,17 +88,19 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Next button
         findViewById(R.id.profileIconNext).setOnClickListener(view -> {
-            //Get index of currently selected Icon - 1
-            int i = availableIcons.indexOf(user.getIcon()) + 1;
 
-            Log.println(Log.DEBUG, "DEBUG", "Size: " + availableIcons.size());
-            //Make sure the index loops in the array
-            if (i == availableIcons.size()) i = 0;
+        //Get index of currently selected Icon - 1
+        int i = availableIcons.indexOf(user.getIcon()) + 1;
 
-            //Set the new Icon
-            Log.println(Log.DEBUG, "DEBUG", "I: " + i);
-            user.setIcon(availableIcons.get(i));
-            icon.setImageDrawable(user.getIcon().getIcon());
+        Log.println(Log.DEBUG, "DEBUG", "Size: " + availableIcons.size());
+          
+        //Make sure the index loops in the array
+        if (i == availableIcons.size()) i = 0;
+
+        //Set the new Icon
+        Log.println(Log.DEBUG, "DEBUG", "I: " + i);
+        user.setIcon(availableIcons.get(i));
+        icon.setImageDrawable(user.getIcon().getIcon());
         });
     }
 
