@@ -20,7 +20,7 @@ import java.util.TreeMap;
 
 public class User {
     private final String ID;
-    private int points;
+    private int points = 0;
     private Land land;
 
     private Icon icon;
@@ -82,11 +82,13 @@ public class User {
             icon = MainActivity.icons.get(Integer.parseInt(scanner.nextLine()));
             pronoun = Pronoun.valueOf(scanner.nextLine());
             title = Title.valueOf(scanner.nextLine());
+            points = Integer.parseInt(scanner.nextLine());
         } catch (FileNotFoundException e) {
             land = new Land("null");
             icon = MainActivity.icons.get(0);
             pronoun = Pronoun.Dappere;
             title = Title.Ridder;
+            points = 0;
             writeUserData();
 
             //Debugging
@@ -103,12 +105,14 @@ public class User {
             1
             Dappere
             Ridder
+            0
              */
 
             writer.write(land.getName() + "\n");
             writer.write(icon.getID() + "\n");
             writer.write(pronoun.name() + "\n");
-            writer.write(title.name());
+            writer.write(title.name() + "\n");
+            writer.write(points + "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -143,6 +147,7 @@ public class User {
     public void setPoints(int points) {
         this.points = points;
         LeaderboardActivity.myPoints.setText("Mijn bijdrage: " + points);
+        writeUserData();
     }
 
     public Pronoun getPronoun() {

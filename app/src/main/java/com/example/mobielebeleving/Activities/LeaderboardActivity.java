@@ -28,6 +28,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         activity = this;
         myPoints = activity.findViewById(R.id.leaderMyPoints);
         myPoints.setBackgroundColor(MainActivity.getUser().getLand().getColor());
+        myPoints.setText("Mijn bijdrage: " + MainActivity.getUser().getPoints());
+
+        findViewById(R.id.leaderStoerIcon).setOnClickListener(view -> MainActivity.getUser().setPoints(MainActivity.getUser().getPoints() + 1));
 
         setBar(Land.LegendeLand, 20);
         setBar(Land.StoerLand, 40);
