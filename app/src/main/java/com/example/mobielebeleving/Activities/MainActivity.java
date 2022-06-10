@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
-import android.provider.Settings;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -17,8 +16,8 @@ import androidx.appcompat.content.res.AppCompatResources;
 import com.example.mobielebeleving.Data.Game;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
-import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.R;
+import com.example.mobielebeleving.MQTT.Settings;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -49,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setWindowAnimations(0);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        MQTTConnect();
 
         context = getApplication().getBaseContext();
         //Actions that will only be performed on a full startup
