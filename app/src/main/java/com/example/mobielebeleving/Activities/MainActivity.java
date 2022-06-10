@@ -164,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
                     case "esstelstrijd/users/defaultUser":
                         System.out.println("we in");
-                        LeaderboardActivity.myPoints.setText("Mijn bijdrage: " + message.toString());
+                        int points = Integer.parseInt(message.toString());
+                        user.setPoints(points);
                         break;
                 }
 
