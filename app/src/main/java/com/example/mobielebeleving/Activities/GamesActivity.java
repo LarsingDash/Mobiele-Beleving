@@ -34,5 +34,8 @@ public class GamesActivity extends AppCompatActivity {
                 adapter.spreadOut(recyclerView.getHeight());
             }
         });
+
+        //Change color of topBar to color of Land
+        findViewById(R.id.topBar).setBackgroundColor(MainActivity.getUser().getLand().getColor());
     }
 }
