@@ -28,7 +28,8 @@ public class MenuBar extends LinearLayout {
     public MenuBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setOrientation(LinearLayout.HORIZONTAL);
-        setBackgroundColor(getResources().getColor(R.color.menuBar));
+        //Set color according to Land
+        setBackgroundColor(MainActivity.getUser().getLand().getColor());
 
         //Define width to spread out the buttons
         DisplayMetrics metrics = new DisplayMetrics();

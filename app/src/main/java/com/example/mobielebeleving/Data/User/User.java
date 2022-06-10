@@ -2,7 +2,9 @@ package com.example.mobielebeleving.Data.User;
 
 import android.util.Log;
 
+import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
+import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Achievement.Achievement;
 
 import java.io.File;
@@ -11,20 +13,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class User {
     private final String ID;
     private int points;
+    private Land land;
 
     private Icon icon;
     private Pronoun pronoun;
     private Title title;
 
-    private final HashMap<String, Achievement> achievements = new HashMap<>();
+    private final TreeMap<String, Achievement> achievements = new TreeMap<>();
     private final File achievementsFile = new File(MainActivity.dir + "/achievements.txt");
     private final File userDataFile = new File(MainActivity.dir + "/userData.txt");
 
@@ -75,11 +78,13 @@ public class User {
     private void loadUserData() {
         try (Scanner scanner = new Scanner(userDataFile)) {
             //Read userData from file
+            land = new Land(scanner.nextLine());
             icon = MainActivity.icons.get(Integer.parseInt(scanner.nextLine()));
-            pronoun = Pronoun.valueOf(scanner.next());
-            title = Title.valueOf(scanner.next());
+            pronoun = Pronoun.valueOf(scanner.nextLine());
+            title = Title.valueOf(scanner.nextLine());
         } catch (FileNotFoundException e) {
-            icon = MainActivity.icons.get(1);
+            land = new Land("null");
+            icon = MainActivity.icons.get(0);
             pronoun = Pronoun.Dappere;
             title = Title.Ridder;
             writeUserData();
@@ -94,11 +99,13 @@ public class User {
         try (FileWriter writer = new FileWriter(userDataFile)) {
             /*
             Example of file (default):
+            Fabelwoud
             1
             Dappere
             Ridder
              */
 
+            writer.write(land.getName() + "\n");
             writer.write(icon.getID() + "\n");
             writer.write(pronoun.name() + "\n");
             writer.write(title.name());
@@ -108,10 +115,11 @@ public class User {
     }
 
     private void createAchievements() {
-        achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(1))), "Welkom!", "Start het spel op"));
-        achievements.put("Profiel", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Magische, Pronoun.Slimme, Title.Fee, Title.Clown, MainActivity.icons.get(2))), "Profiel", "Navigeer naar jouw profiel"));
-        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "jebollemama"));
-    }
+        achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(1))), "Welkom!", "Start het spel op", "Reward 1"));
+        achievements.put("Profiel", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Magische, Pronoun.Slimme, Title.Fee, Title.Clown, MainActivity.icons.get(2))), "Profiel", "Navigeer naar jouw profiel", "Reward 2"));
+        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "jebollemama", "Reward 3"));
+        achievements.put("Avonturier", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(0))), "Avonturier", "Bekijk de details van een spel", "Ontdekkende - Avonturier"));
+        }
 
     private void printForDebug() {
         //Print the entire list of achievements in the Log for debugging
@@ -134,6 +142,7 @@ public class User {
 
     public void setPoints(int points) {
         this.points = points;
+        LeaderboardActivity.myPoints.setText("Mijn bijdrage: " + points);
     }
 
     public Pronoun getPronoun() {
@@ -144,7 +153,7 @@ public class User {
         return title;
     }
 
-    public HashMap<String, Achievement> getAchievements() {
+    public TreeMap<String, Achievement> getAchievements() {
         return achievements;
     }
 
@@ -163,11 +172,12 @@ public class User {
         writeUserData();
     }
 
-    public File getAchievementsFile() {
-        return achievementsFile;
+    public Land getLand() {
+        return land;
     }
 
-    public File getUserDataFile() {
-        return userDataFile;
+    public void setLand(Land land) {
+        this.land = land;
+        writeUserData();
     }
 }

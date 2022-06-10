@@ -19,6 +19,9 @@
         </service>
 
         <activity
+            android:name=".Activities.LandActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.DetailActivity"
             android:exported="false" />
         <activity

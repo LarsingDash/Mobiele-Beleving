@@ -3,14 +3,20 @@ package com.example.mobielebeleving.Activities;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.Pronoun;
 import com.example.mobielebeleving.Data.User.Title;
@@ -18,6 +24,7 @@ import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
+import com.example.mobielebeleving.Views.AchievementsViewAdapter;
 
 import java.util.ArrayList;
 
@@ -32,8 +39,14 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getWindow().setWindowAnimations(0);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         user = MainActivity.getUser();
+
+        ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> {
+            user.setLand(new Land("null"));
+            Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
+        });
 
         //Set initial values for Icon and UserID
         ImageView icon = findViewById(R.id.profileIcon);
@@ -43,6 +56,17 @@ public class ProfileActivity extends AppCompatActivity {
         makeIconButtons();
         makePronounSpinner();
         makeTitleSpinner();
+
+        //Binding RecyclerView for the achievementView
+        RecyclerView recyclerView = findViewById(R.id.achievementView);
+        AchievementsViewAdapter adapter = new AchievementsViewAdapter(this, new ArrayList<>(user.getAchievements().values()));
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Make design according to selected land
+        ConstraintLayout userLayout = findViewById(R.id.userLayout);
+        userLayout.setBackgroundColor(user.getLand().getColor());
     }
 
     private void makeIconButtons() {
@@ -57,22 +81,26 @@ public class ProfileActivity extends AppCompatActivity {
             if (i < 0) i = availableIcons.size() - 1;
 
             //Set the new Icon
+            Log.println(Log.DEBUG, "DEBUG", i + "");
             user.setIcon(availableIcons.get(i));
             icon.setImageDrawable(user.getIcon().getIcon());
         });
 
         //Next button
         findViewById(R.id.profileIconNext).setOnClickListener(view -> {
-//            //Get index of currently selected Icon - 1
-//            int i = availableIcons.indexOf(user.getIcon()) + 1;
-//
-//            //Make sure the index loops in the array
-//            if (i == availableIcons.size()) i = 0;
-//
-//            //Set the new Icon
-//            user.setIcon(availableIcons.get(i));
-//            icon.setImageDrawable(user.getIcon().getIcon());
-            TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable);
+
+        //Get index of currently selected Icon - 1
+        int i = availableIcons.indexOf(user.getIcon()) + 1;
+
+        Log.println(Log.DEBUG, "DEBUG", "Size: " + availableIcons.size());
+          
+        //Make sure the index loops in the array
+        if (i == availableIcons.size()) i = 0;
+
+        //Set the new Icon
+        Log.println(Log.DEBUG, "DEBUG", "I: " + i);
+        user.setIcon(availableIcons.get(i));
+        icon.setImageDrawable(user.getIcon().getIcon());
         });
     }
 
@@ -82,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Creating and binding the Adapter for the Spinner
         Spinner pronounSpinner = findViewById(R.id.profilePronoun);
-        ArrayAdapter<Pronoun> pronounAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, availablePronouns);
+        ArrayAdapter<Pronoun> pronounAdapter = new ArrayAdapter<>(this, R.layout.spinner_row, availablePronouns);
         pronounAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pronounSpinner.setAdapter(pronounAdapter);
 
@@ -115,7 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
         String target = user.getTitle().name();
         
         Spinner titleSpinner = findViewById(R.id.profileTitle);
-        ArrayAdapter<Title> titleAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, availableTitles);
+        ArrayAdapter<Title> titleAdapter = new ArrayAdapter<>(this, R.layout.spinner_row, availableTitles);
         titleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         titleSpinner.setAdapter(titleAdapter);
 

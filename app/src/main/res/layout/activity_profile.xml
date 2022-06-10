@@ -14,60 +14,93 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="35dp"
+            android:contentDescription="@string/profile_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/test_icon" />
+
+        <Spinner
+            android:id="@+id/profilePronoun"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="profilePronounSpinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileIcon"
+            app:layout_constraintTop_toTopOf="@+id/profileIcon" />
+
+        <Spinner
+            android:id="@+id/profileTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="profileTitleSpinner"
+            app:layout_constraintBottom_toBottomOf="@id/profileIconNext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileIcon" />
+
+        <ImageView
+            android:id="@+id/profileIconPrevious"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toStartOf="@id/profileIconNext"
+            app:layout_constraintStart_toStartOf="@+id/profileIcon"
+            app:layout_constraintTop_toBottomOf="@+id/profileIcon"
+            app:srcCompat="@drawable/arrowleft" />
+
+        <ImageView
+            android:id="@+id/profileIconNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/profileIcon"
+            app:layout_constraintStart_toEndOf="@id/profileIconPrevious"
+            app:layout_constraintTop_toBottomOf="@+id/profileIcon"
+            app:srcCompat="@drawable/arrowright" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/achievementView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/menuBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userLayout"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/userID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="userID"
-        app:layout_constraintBottom_toTopOf="@+id/menuBar"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/profileIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:contentDescription="@string/profile_icon"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/profilePronoun"
-        app:srcCompat="@drawable/test_icon" />
-
-    <Spinner
-        android:id="@+id/profilePronoun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:contentDescription="profilePronounSpinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileIcon"
-        app:layout_constraintTop_toTopOf="@+id/profileIcon" />
-
-    <Spinner
-        android:id="@+id/profileTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:contentDescription="profileTitleSpinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileIcon"
-        app:layout_constraintBottom_toBottomOf="@id/profileIconNext"/>
-
-    <Button
-        android:id="@+id/profileIconPrevious"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="L"
-        app:layout_constraintEnd_toStartOf="@id/profileIconNext"
-        app:layout_constraintStart_toStartOf="@+id/profileIcon"
-        app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
-
-    <Button
-        android:id="@+id/profileIconNext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="R"
-        app:layout_constraintEnd_toEndOf="@+id/profileIcon"
-        app:layout_constraintStart_toEndOf="@id/profileIconPrevious"
-        app:layout_constraintTop_toBottomOf="@+id/profileIcon" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
