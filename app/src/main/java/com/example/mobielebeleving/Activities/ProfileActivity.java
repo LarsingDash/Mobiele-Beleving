@@ -101,6 +101,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.println(Log.DEBUG, "DEBUG", "I: " + i);
         user.setIcon(availableIcons.get(i));
         icon.setImageDrawable(user.getIcon().getIcon());
+        TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser");
         });
     }
 

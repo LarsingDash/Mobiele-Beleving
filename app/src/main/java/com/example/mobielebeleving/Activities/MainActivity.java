@@ -16,8 +16,8 @@ import androidx.appcompat.content.res.AppCompatResources;
 import com.example.mobielebeleving.Data.Game;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
-import com.example.mobielebeleving.R;
 import com.example.mobielebeleving.MQTT.Settings;
+import com.example.mobielebeleving.R;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -160,6 +160,12 @@ public class MainActivity extends AppCompatActivity {
                         } else {
 
                         }
+                        break;
+
+                    case "esstelstrijd/users/defaultUser":
+                        System.out.println("we in");
+                        LeaderboardActivity.myPoints.setText("Mijn bijdrage: " + message.toString());
+                        break;
                 }
 
 
