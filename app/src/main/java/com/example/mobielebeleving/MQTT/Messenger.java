@@ -1,14 +1,14 @@
 package com.example.mobielebeleving.MQTT;
 
-import info.mqtt.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.UnsupportedEncodingException;
 
+import info.mqtt.android.service.MqttAndroidClient;
+
 public class Messenger {
 
-    private void publishMessage(MqttAndroidClient client, String topic, String msg) {
+    public static void publishMessage(MqttAndroidClient client, String topic, String msg) {
         byte[] encodedPayload = new byte[0];
         try {
             // Convert the message to a UTF-8 encoded byte array

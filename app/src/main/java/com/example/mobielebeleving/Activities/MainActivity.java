@@ -2,10 +2,16 @@ package com.example.mobielebeleving.Activities;
 
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Point;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -16,20 +22,22 @@ import androidx.appcompat.content.res.AppCompatResources;
 import com.example.mobielebeleving.Data.Game;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
+import com.example.mobielebeleving.MQTT.Messenger;
 import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.R;
 
-import info.mqtt.android.service.Ack;
-import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import info.mqtt.android.service.Ack;
+import info.mqtt.android.service.MqttAndroidClient;
 
 public class MainActivity extends AppCompatActivity {
     private static boolean firstTime = true;
@@ -37,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     private static User user;
     public static String dir;
     public static HashMap<Integer, Icon> icons = new HashMap<>();
+
+    public static NfcAdapter nfcAdapter;
+    public static PendingIntent pendingIntent;
+    public static IntentFilter writingTagFilters[];
+    public static Tag myTag;
+    public static String nfcTag;
 
     @SuppressLint("StaticFieldLeak")
     public static Context context;
@@ -49,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setWindowAnimations(0);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        NFCStart();
         MQTTConnect();
 
         context = getApplication().getBaseContext();
@@ -179,6 +194,80 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void NFCStart(){
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (nfcAdapter == null) {
+            Toast.makeText(this, "this device does not support NFC", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        readformIntent(getIntent());
+        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE);
+        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
+        writingTagFilters = new IntentFilter[]{tagDetected};
+    }
+
+    private void readformIntent(Intent intent) {
+        String action = intent.getAction();
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action) ||
+                NfcAdapter.ACTION_TECH_DISCOVERED.equals(action) ||
+                NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            NdefMessage[] msgs = null;
+            if (rawMsgs != null) {
+                msgs = new NdefMessage[rawMsgs.length];
+                for (int i = 0; i < rawMsgs.length; i++) {
+                    msgs[i] = (NdefMessage) rawMsgs[i];
+                }
+            }
+            buildTagViews(msgs);
+        }
+    }
+    // zorgt voor het uitprinten van de nfc context
+    private void buildTagViews(NdefMessage[] msgs) {
+        if (msgs == null || msgs.length == 0) {
+            return;
+        }
+        String text = "";
+        byte[] payload = msgs[0].getRecords()[0].getPayload();
+        String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+        int lanquageCodeLenth = payload[0] & 0063;
+
+        try {
+            text = new String(payload, lanquageCodeLenth + 1, payload.length - lanquageCodeLenth - 1, textEncoding);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        nfcTag= text;
+
+        if(text.equals("spel 1")){
+            System.out.println("start spel 1");
+            Toast toast= Toast.makeText(this,text,Toast.LENGTH_SHORT);
+            toast.show();
+            Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser", "420");
+            System.out.println("it did");
+        }
+    }
+    //belangeerijk voor afdrukken;
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        readformIntent(intent);
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+            myTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();}
 
     public static User getUser() {
         return user;
