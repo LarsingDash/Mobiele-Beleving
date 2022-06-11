@@ -8,4 +8,5 @@
     <string name="game_description">gameDescription</string>
     <string name="game_preview_photo">Game Preview Photo</string>
     <string name="game_detail_scroll_view">gameDetailScrollView</string>
+    <string name="location_image">locationImage</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.mobielebeleving.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.WindowManager;
@@ -34,5 +35,12 @@ public class DetailActivity extends AppCompatActivity {
         int color = MainActivity.getUser().getLand().getColor();
         findViewById(R.id.topPart).setBackgroundColor(color);
         findViewById(R.id.locationButton).setBackgroundColor(color);
+
+        //Location button popup
+        findViewById(R.id.locationButton).setOnClickListener(view -> {
+            Intent intent = new Intent(this, LocationPopup.class);
+            intent.putExtra("game", game.getName());
+            startActivity(intent);
+        });
     }
 }
