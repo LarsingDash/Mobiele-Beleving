@@ -1,6 +1,6 @@
 package com.example.mobielebeleving.MQTT;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
@@ -23,7 +23,7 @@ public class Messenger {
 
             // Publish the message via the MQTT broker
             client.publish(topic, message);
-        } catch (UnsupportedEncodingException | MqttException e) {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }

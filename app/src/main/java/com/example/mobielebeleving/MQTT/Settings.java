@@ -1,5 +1,5 @@
 package com.example.mobielebeleving.MQTT;
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import info.mqtt.android.service.MqttAndroidClient;
 
 import java.util.UUID;
 

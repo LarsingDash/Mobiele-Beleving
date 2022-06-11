@@ -19,7 +19,8 @@ import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.R;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import info.mqtt.android.service.Ack;
+import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -107,27 +108,23 @@ public class MainActivity extends AppCompatActivity {
     private void MQTTConnect() {
         Settings.mqttAndroidClient =
                 new MqttAndroidClient(this.getApplicationContext(), Settings.brokerHostUrl,
-                        Settings.clientID);
+                        Settings.clientID, Ack.AUTO_ACK);
 
-        try {
-            IMqttToken token = Settings.mqttAndroidClient.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // We are connected
-                    Log.d(Settings.TAG, "onSuccess");
-                }
+        IMqttToken token = Settings.mqttAndroidClient.connect();
+        token.setActionCallback(new IMqttActionListener() {
+            @Override
+            public void onSuccess(IMqttToken asyncActionToken) {
+                // We are connected
+                Log.d(Settings.TAG, "onSuccess");
+            }
 
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.g. connection timeout or firewall problems
-                    Log.d(Settings.TAG, "onFailure" + exception);
+            @Override
+            public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                // Something went wrong e.g. connection timeout or firewall problems
+                Log.d(Settings.TAG, "onFailure" + exception);
 
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+            }
+        });
         Settings.mqttAndroidClient.setCallback(new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {
