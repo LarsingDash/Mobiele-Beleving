@@ -1,17 +1,15 @@
 package com.example.mobielebeleving.Views;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.example.mobielebeleving.Activities.GamesActivity;
 import com.example.mobielebeleving.Activities.LeaderboardActivity;
@@ -22,8 +20,7 @@ import com.example.mobielebeleving.R;
 import java.util.Objects;
 
 public class MenuBar extends LinearLayout {
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    @SuppressLint("UseCompatLoadingForDrawables")
+    private static int width = 0;
 
     public MenuBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -31,25 +28,34 @@ public class MenuBar extends LinearLayout {
         //Set color according to Land
         setBackgroundColor(MainActivity.getUser().getLand().getColor());
 
-        //Define width to spread out the buttons
-        DisplayMetrics metrics = new DisplayMetrics();
-        context.getDisplay().getMetrics(metrics);
-        int width = metrics.widthPixels / 3;
+        //Find all buttons
+        ImageView gamesButton = new ImageView(context, attrs);
+        ImageView leaderboardButton = new ImageView(context, attrs);
+        ImageView profileButton = new ImageView(context, attrs);
+
+        //Spread out the buttons
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                width = getWidth();
+                gamesButton.setMinimumWidth(width / 3);
+                leaderboardButton.setMinimumWidth(width / 3);
+                profileButton.setMinimumWidth(width / 3);
+            }
+        });
 
         //Define attributes of all buttons
-        ImageView gamesButton = new ImageView(context, attrs);
-        gamesButton.setImageDrawable(context.getDrawable(R.drawable.games_icon));
-        gamesButton.setMinimumWidth(width);
+        gamesButton.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.games_icon));
+        gamesButton.setMinimumWidth(width / 3);
         addView(gamesButton);
 
-        ImageView leaderboardButton = new ImageView(context, attrs);
-        leaderboardButton.setImageDrawable(context.getDrawable(R.drawable.leaderboard_icon));
-        leaderboardButton.setMinimumWidth(width);
+        leaderboardButton.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.leaderboard_icon));
+        leaderboardButton.setMinimumWidth(width / 3);
         addView(leaderboardButton);
 
-        ImageView profileButton = new ImageView(context, attrs);
-        profileButton.setImageDrawable(context.getDrawable(R.drawable.profile_icon));
-        profileButton.setMinimumWidth(width);
+        profileButton.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.profile_icon));
+        profileButton.setMinimumWidth(width / 3);
         addView(profileButton);
 
         //Click actions

@@ -81,25 +81,24 @@ public class MainActivity extends AppCompatActivity {
         icons.put(3, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon4)));
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private void makeGames() {
         games.add(new Game("Festival Overal",
                 "Festival Overal",
-                getDrawable(R.drawable.game1),
+                AppCompatResources.getDrawable(this, R.drawable.game1),
                 getResources().getString(R.string.game1story),
                 getResources().getString(R.string.game1explanation),
                 new Point(0, 0)));
 
         games.add(new Game("Johan en de Eenhoorn",
                 "Johan en de Eenhoorn",
-                getDrawable(R.drawable.game2),
+                AppCompatResources.getDrawable(this, R.drawable.game2),
                 getResources().getString(R.string.game2story),
                 getResources().getString(R.string.game2explanation),
                 new Point(0, 0)));
 
         games.add(new Game("Droomreis",
                 "Droomreis",
-                getDrawable(R.drawable.game3),
+                AppCompatResources.getDrawable(this, R.drawable.game3),
                 getResources().getString(R.string.game3story),
                 getResources().getString(R.string.game3explanation),
                 new Point(0, 0)));
