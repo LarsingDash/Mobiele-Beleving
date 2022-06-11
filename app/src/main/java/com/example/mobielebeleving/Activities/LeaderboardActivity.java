@@ -1,11 +1,13 @@
 package com.example.mobielebeleving.Activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -14,6 +16,7 @@ import com.example.mobielebeleving.R;
 
 public class LeaderboardActivity extends AppCompatActivity {
     private static int highest = 0;
+    private static int height = -1;
     private static LeaderboardActivity activity;
 
     private static int legendeland = 0;
@@ -81,6 +84,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         //Getting the total height of the bar so that the bar can be scaled properly
         bar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onGlobalLayout() {
                 bar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -93,7 +97,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 //Push the counter down (and the bar along with it)
                 ViewGroup.MarginLayoutParams paramsCounter = (ViewGroup.MarginLayoutParams) counter.getLayoutParams();
 
-                int height = bar.getHeight();
+                if (height == -1) height = bar.getHeight();
                 double percentage = points / (double) highest;
 
                 //Calculate the distance
