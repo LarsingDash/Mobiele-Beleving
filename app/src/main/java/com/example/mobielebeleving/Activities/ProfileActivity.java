@@ -1,5 +1,7 @@
 package com.example.mobielebeleving.Activities;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static ArrayList<Icon> availableIcons = new ArrayList<>();
     public static ArrayList<Pronoun> availablePronouns = new ArrayList<>();
     public static ArrayList<Title> availableTitles = new ArrayList<>();
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         //Make design according to selected land
         ConstraintLayout userLayout = findViewById(R.id.userLayout);
         userLayout.setBackgroundColor(user.getLand().getColor());
+
+        //Help button
+        findViewById(R.id.helpButton).setOnClickListener(view -> startActivity(new Intent(this, HelpPopup.class)));
     }
 
     private void makeIconButtons() {

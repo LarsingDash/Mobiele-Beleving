@@ -42,6 +42,9 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
     public void onBindViewHolder(@NonNull LandHolder holder, int position) {
         Land land = lands.get(position);
 
+        if (land.getName().equals("INFO")) holder.button.setVisibility(View.GONE);
+
+
         //Set attributes for all views according to the Land
         holder.layout.setBackgroundColor(land.getColor());
         holder.name.setText(land.getName());

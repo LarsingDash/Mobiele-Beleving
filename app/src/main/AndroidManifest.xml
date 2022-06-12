@@ -21,11 +21,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MobieleBeleving">
+
+        <activity
+            android:name=".Activities.HelpPopup"
+            android:theme="@style/Popup" />
         <activity
             android:name=".Activities.LocationPopup"
-            android:theme="@style/Popup"/>
+            android:theme="@style/Popup" />
 
-        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
 
         <activity
             android:name=".Activities.LandActivity"

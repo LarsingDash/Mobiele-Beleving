@@ -28,10 +28,13 @@ public class Land {
                 break;
 
             case Fabelwoud:
-            default:
                 story = MainActivity.context.getResources().getString(R.string.fabelwoud);
                 color = MainActivity.context.getResources().getColor(R.color.fabel);
                 break;
+
+            default:
+                story = MainActivity.context.getResources().getString(R.string.game1story);
+                color = MainActivity.context.getResources().getColor(R.color.dark_gray);
         }
     }
 
