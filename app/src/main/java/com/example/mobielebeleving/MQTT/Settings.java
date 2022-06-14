@@ -1,7 +1,8 @@
 package com.example.mobielebeleving.MQTT;
-import info.mqtt.android.service.MqttAndroidClient;
 
 import java.util.UUID;
+
+import info.mqtt.android.service.MqttAndroidClient;
 
 public class Settings {
 

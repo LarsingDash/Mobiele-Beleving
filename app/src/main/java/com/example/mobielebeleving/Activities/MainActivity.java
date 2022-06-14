@@ -1,6 +1,8 @@
 package com.example.mobielebeleving.Activities;
 
 
+import static java.lang.Integer.parseInt;
+
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -58,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("HardwareIds")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setWindowAnimations(0);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -154,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                     //Topic check for each land's points
                     case Settings.topicFabelwoudPoints:
                         System.out.println("TO-DO");
+                        int newMessage = Integer.parseInt(message.toString());
+                        user.setPoints(newMessage);
                         break;
 
                     case Settings.topicLegendelandPoints:
@@ -177,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case "esstelstrijd/users/defaultUser":
                         System.out.println("we in");
-                        int points = Integer.parseInt(message.toString());
+                        int points = parseInt(message.toString());
                         user.setPoints(points);
                         break;
                 }
@@ -245,12 +248,20 @@ public class MainActivity extends AppCompatActivity {
         }
         nfcTag= text;
 
-        if(text.equals("spel 1")){
-            System.out.println("start spel 1");
-            Toast toast= Toast.makeText(this,text,Toast.LENGTH_SHORT);
-            toast.show();
-            Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser", "420");
-            System.out.println("it did");
+
+        switch (text) {
+            case "droomreis":
+                System.out.println("start spel 1");
+                Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+                toast.show();
+                Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser", "420");
+                System.out.println("it did");
+                break;
+
+            case "spel 2":
+                System.out.println("Je ma");
+                break;
+
         }
     }
     //belangeerijk voor afdrukken;
