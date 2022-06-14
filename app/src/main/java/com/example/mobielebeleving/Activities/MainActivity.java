@@ -199,15 +199,6 @@ public class MainActivity extends AppCompatActivity {
                         user.setPoints(points);
                         break;
                 }
-
-
-
-
-                if (topic.equals(Settings.topicFabelwoudPoints)) {
-                    System.out.println(message.toString());
-                } else if (topic.equals("larstest/lars")) {
-                    System.out.println(message.toString());
-                }
             }
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
@@ -265,16 +256,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         switch (text) {
-            case "droomreis":
-                System.out.println("start spel 1");
+            case "Droomreis Activation TAG":
+                System.out.println("Droomreis activation TAG");
                 Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
                 toast.show();
                 Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser", "420");
                 System.out.println("it did");
                 break;
 
-            case "spel 2":
-                System.out.println("Je ma");
+            case "Johan en de Eenhoorn Activation TAG":
+                System.out.println("Johan en de Eenhoorn activation TAG");
                 break;
 
         }

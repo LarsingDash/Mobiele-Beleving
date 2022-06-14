@@ -19,9 +19,9 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class User {
-    private final String ID;
+    public static String ID = "";
     private int points = 0;
-    private Land land;
+    public static Land land;
 
     private Icon icon;
     private Pronoun pronoun;
@@ -132,7 +132,7 @@ public class User {
         }
     }
 
-    public String getID() {
+    public static String getID() {
         return ID;
     }
 
@@ -177,7 +177,7 @@ public class User {
         writeUserData();
     }
 
-    public Land getLand() {
+    public static Land getLand() {
         return land;
     }
 
