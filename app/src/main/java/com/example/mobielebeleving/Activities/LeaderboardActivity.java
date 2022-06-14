@@ -48,6 +48,8 @@ public class LeaderboardActivity extends AppCompatActivity {
         setBar(Land.Legendeland, legendeland);
         setBar(Land.Stoerland, stoerland);
         setBar(Land.Fabelwoud, fabelwoud);
+
+        MainActivity.canSubscribe = true;
     }
 
     public static void setBar(String land, int points) {

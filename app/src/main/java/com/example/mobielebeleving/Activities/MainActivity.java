@@ -27,6 +27,7 @@ import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.MQTT.Messenger;
 import com.example.mobielebeleving.MQTT.Settings;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     public static IntentFilter writingTagFilters[];
     public static Tag myTag;
     public static String nfcTag;
+
+    public static boolean canSubscribe = false;
 
     @SuppressLint("StaticFieldLeak")
     public static Context context;
@@ -83,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
             //Using Settings to obtain the deviceID
             user = new User(android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID));
         }
+
+        new Thread(() -> {
+            try {
+                while (!canSubscribe) {
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            TopicHandler.runStartupSubscriptions();
+        }).start();
 
         //Start LandActivity after all startup tasks are completed, unless a Land has already been chosen
         if (user.getLand().getName().equals("null")) {

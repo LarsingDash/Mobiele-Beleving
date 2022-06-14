@@ -58,5 +58,7 @@ public class LandActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if (!MainActivity.canSubscribe) MainActivity.canSubscribe = true;
     }
 }

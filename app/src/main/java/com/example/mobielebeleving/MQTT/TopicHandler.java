@@ -1,13 +1,13 @@
 package com.example.mobielebeleving.MQTT;
 
-import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttException;
+
+import info.mqtt.android.service.MqttAndroidClient;
 
 public class TopicHandler {
 
     public static void subscribeToTopic(MqttAndroidClient client, final String topic) {
-            // Try to subscribe to the topic
+        // Try to subscribe to the topic
         IMqttToken token = client.subscribe(topic, Settings.qualityOfService);
         System.out.println("Succesvol");
     }
@@ -16,5 +16,9 @@ public class TopicHandler {
 
         // Try to unsubscribe to the topic
         IMqttToken token = client.unsubscribe(topic);
+    }
+
+    public static void runStartupSubscriptions() {
+        TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, Settings.topicFabelwoudPoints);
     }
 }
