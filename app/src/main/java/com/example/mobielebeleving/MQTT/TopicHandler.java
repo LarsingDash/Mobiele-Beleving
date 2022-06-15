@@ -76,23 +76,23 @@ public class TopicHandler {
     }
 
     public static void linkToDroom() {
-        Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicDroomCurrentUser, User.getID());
+        TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable);
         Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable, "no");
         TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicDroomCurrentUser);
-        TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable);
+        Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicDroomCurrentUser, User.getID());
     }
 
     public static void linkToJede() {
-        Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicJedeCurrentUser, User.getID());
+        TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicJedeIsAvailable);
         Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicJedeIsAvailable, "no");
         TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicJedeCurrentUser);
-        TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicJedeIsAvailable);
+        Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicJedeCurrentUser, User.getID());
     }
 
     public static void linkToFest() {
-        Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicFestCurrentUser, User.getID());
+        TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicFestIsAvailable);
         Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicFestIsAvailable, "no");
         TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicFestCurrentUser);
-        TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicFestIsAvailable);
+        Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicFestCurrentUser, User.getID());
     }
 }
