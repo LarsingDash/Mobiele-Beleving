@@ -47,9 +47,17 @@ public class TopicHandler {
 //        Messenger.publishMessage(Settings.mqttAndroidClient, name, User.getPoints() + "");
         TopicHandler.subscribeToRetainedTopic(Settings.mqttAndroidClient, namePoints);
 
-//        String nameLand = "esstelstrijd/users/" + User.getID() + "/land";
-//        String land = User.getLand().getName();
-//        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, nameLand, land);
+        if (User.getLand().getName() != null) {
+            String nameLand = "esstelstrijd/users/" + User.getID() + "/land";
+            String land = User.getLand().getName();
+            Messenger.publishRetainingMessage(Settings.mqttAndroidClient, nameLand, land);
+        }
+    }
+
+    public static void confirmLandChoice() {
+        String nameLand = "esstelstrijd/users/" + User.getID() + "/land";
+        String land = User.getLand().getName();
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, nameLand, land);
     }
 
     public static void connectToDroom() {

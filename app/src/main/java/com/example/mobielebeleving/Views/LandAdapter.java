@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Land;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
         holder.button.setOnClickListener(view -> {
             MainActivity.getUser().setLand(land);
             context.startActivity(new Intent(context, LeaderboardActivity.class));
+            TopicHandler.confirmLandChoice();
             ((Activity) context).finish();
         });
         holder.button.setBackgroundColor(context.getResources().getColor(R.color.white));
