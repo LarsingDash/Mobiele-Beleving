@@ -19,9 +19,9 @@ public class LeaderboardActivity extends AppCompatActivity {
     private static int height = -1;
     private static LeaderboardActivity activity;
 
-    private static int legendeland = 0;
-    private static int stoerland = 0;
-    private static int fabelwoud = 0;
+    public static int legendeland = 0;
+    public static int stoerland = 0;
+    public static int fabelwoud = 0;
 
     public static TextView myPoints;
 
@@ -40,9 +40,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         //DEBUG BUTTONS
         findViewById(R.id.leaderStoerIcon).setOnClickListener(view -> MainActivity.getUser().setPoints(MainActivity.getUser().getPoints() + 1));
         findViewById(R.id.leaderFabelIcon).setOnClickListener(view -> {
-            setBar(Land.Stoerland, 80);
-            setBar(Land.Legendeland, 50);
-            setBar(Land.Fabelwoud, 20);
+            setBar(Land.Stoerland, stoerland);
+            setBar(Land.Legendeland, legendeland);
+            setBar(Land.Fabelwoud, fabelwoud);
         });
 
         setBar(Land.Legendeland, legendeland);

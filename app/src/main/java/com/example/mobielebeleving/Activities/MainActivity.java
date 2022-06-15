@@ -25,7 +25,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import com.example.mobielebeleving.Data.Game;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
-import com.example.mobielebeleving.MQTT.Messenger;
 import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
@@ -85,19 +84,19 @@ public class MainActivity extends AppCompatActivity {
 
             //Using Settings to obtain the deviceID
             user = new User(android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID));
+            new Thread(() -> {
+                try {
+                    while (!canSubscribe) {
+                        Thread.sleep(500);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                TopicHandler.runStartupSubscriptions();
+            }).start();
         }
 
-        new Thread(() -> {
-            try {
-                while (!canSubscribe) {
-                    Thread.sleep(100);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            TopicHandler.runStartupSubscriptions();
-        }).start();
 
         //Start LandActivity after all startup tasks are completed, unless a Land has already been chosen
         if (user.getLand().getName().equals("null")) {
@@ -166,37 +165,63 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 // Check what topic the message is for and handle accordingly
+
+                if (topic.equals("esstelstrijd/users/" + User.getID() + "/points")) {
+                    System.out.println("we got here");
+                    Toast toastPoints = Toast.makeText(getApplication().getBaseContext(), "Points added to user", Toast.LENGTH_SHORT);
+                    toastPoints.show();
+                    int points = parseInt(message.toString());
+                    user.setPoints(points);
+                }
+
                 switch (topic) {
                     //Topic check for each land's points
                     case Settings.topicFabelwoudPoints:
-                        System.out.println("TO-DO");
-                        int newMessage = Integer.parseInt(message.toString());
-                        user.setPoints(newMessage);
+                        LeaderboardActivity.fabelwoud = Integer.parseInt(message.toString());
                         break;
 
                     case Settings.topicLegendelandPoints:
-                        System.out.println("TO-DO");
+                        LeaderboardActivity.legendeland = Integer.parseInt(message.toString());
                         break;
 
                     case Settings.topicStoerlandPoints:
-                        System.out.println("TO-DO");
+                        LeaderboardActivity.stoerland = Integer.parseInt(message.toString());
                         break;
 
                     //Topic check for Droomreis topics
                     case Settings.topicDroomIsAvailable:
                         if (message.toString().equals("yes")) {
-                            System.out.println("Entering");
-                            Toast toast = Toast.makeText(getApplication().getBaseContext(), "Game is already in use.", Toast.LENGTH_SHORT);
-                            toast.show();
+                            Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                            toastDroom.show();
+                            TopicHandler.linkToDroom();
                         } else {
-
+                            Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
+                            toastDroom.show();
                         }
                         break;
 
-                    case "esstelstrijd/users/defaultUser":
-                        System.out.println("we in");
-                        int points = parseInt(message.toString());
-                        user.setPoints(points);
+                        //Topic check for Johan en de Eenhoorn topics
+                    case Settings.topicJedeIsAvailable:
+                        if (message.toString().equals("yes")) {
+                            Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                            toastJede.show();
+                            TopicHandler.linkToJede();
+                        } else {
+                            Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
+                            toastJede.show();
+                        }
+                        break;
+
+                        //Topic check for Festival topics
+                    case Settings.topicFestIsAvailable:
+                        if (message.toString().equals("yes")) {
+                            Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                            toastFest.show();
+                            TopicHandler.linkToFest();
+                        } else {
+                            Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
+                            toastFest.show();
+                        }
                         break;
                 }
             }
@@ -257,15 +282,21 @@ public class MainActivity extends AppCompatActivity {
 
         switch (text) {
             case "Droomreis Activation TAG":
-                System.out.println("Droomreis activation TAG");
-                Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-                toast.show();
-                Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser", "420");
-                System.out.println("it did");
+                TopicHandler.connectToDroom();
+                Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                toastDroom.show();
                 break;
 
             case "Johan en de Eenhoorn Activation TAG":
-                System.out.println("Johan en de Eenhoorn activation TAG");
+                TopicHandler.connectToJede();
+                Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                toastJede.show();
+                break;
+
+            case "Festival Activation TAG":
+                TopicHandler.connectToFest();
+                Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                toastFest.show();
                 break;
 
         }

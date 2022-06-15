@@ -30,9 +30,6 @@ public class Settings {
     public static final String topicFestIsAvailable = "esstelstrijd/games/fest/isAvailable";
     public static final String topicFestCurrentUser = "esstelstrijd/games/fest/currentUser";
 
-    //Topics related to Users
-    public static final String topicUsers = "esstelstrijd/users/";
-
     //Topics related to Land's
     public static final String topicLegendelandPoints = "esstelstrijd/lands/legende/points";
     public static final String topicFabelwoudPoints = "esstelstrijd/lands/fabel/points";
