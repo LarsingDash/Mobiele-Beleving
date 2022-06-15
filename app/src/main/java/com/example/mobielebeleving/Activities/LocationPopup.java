@@ -20,18 +20,17 @@ public class LocationPopup extends AppCompatActivity {
         setContentView(R.layout.activity_location_popup);
 
         ImageView image = findViewById(R.id.location);
-        //Todo change to new names
         switch (getIntent().getExtras().getString("game")) {
-            case "Festival Overal":
-                image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.icon1));
+            case "Smiley's feest!":
+                image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.festival_location));
                 break;
 
-            case "Johan en de Eenhoorn":
-                image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.icon2));
+            case "Epische strijd":
+                image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.johan_location));
                 break;
 
-            case "Droomreis":
-                image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.icon3));
+            case "Magische verdediging":
+                image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.droomreis_location));
         }
 
         ConstraintLayout locationPopup = findViewById(R.id.locationPopup);
@@ -40,7 +39,7 @@ public class LocationPopup extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 locationPopup.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int dimension = locationPopup.getWidth() / 10 * 9;
+                int dimension = (int) (locationPopup.getWidth() / 10 * 9.5d);
                 getWindow().setLayout(dimension, dimension);
             }
         });

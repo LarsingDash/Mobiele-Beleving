@@ -44,8 +44,8 @@ public class TopicHandler {
         System.out.println(namePoints);
         String randomNumber = Integer.toString(getRandomNumberUsingNextInt(0, 1000));
         Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/misc/defaultStart", randomNumber);
-//        Messenger.publishMessage(Settings.mqttAndroidClient, name, User.getPoints() + "");
-        TopicHandler.subscribeToRetainedTopic(Settings.mqttAndroidClient, namePoints);
+        Messenger.publishMessage(Settings.mqttAndroidClient, namePoints, User.getPoints() + "");
+        TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, namePoints);
 
         if (User.getLand().getName() != null) {
             String nameLand = "esstelstrijd/users/" + User.getID() + "/land";

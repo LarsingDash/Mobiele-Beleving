@@ -1,5 +1,6 @@
 package com.example.mobielebeleving.Activities;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.mobielebeleving.Data.Land;
+import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.R;
 
 public class LeaderboardActivity extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     public static int fabelwoud = 0;
 
     public static TextView myPoints;
+    private static int dimen = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +35,13 @@ public class LeaderboardActivity extends AppCompatActivity {
         getWindow().setWindowAnimations(0);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) dimen = 200;
+        else dimen = 100;
+
         activity = this;
         myPoints = activity.findViewById(R.id.leaderMyPoints);
-        myPoints.setBackgroundColor(MainActivity.getUser().getLand().getColor());
-        myPoints.setText("Mijn bijdrage: " + MainActivity.getUser().getPoints());
-
-        //DEBUG BUTTONS
-        findViewById(R.id.leaderStoerIcon).setOnClickListener(view -> MainActivity.getUser().setPoints(MainActivity.getUser().getPoints() + 1));
-        findViewById(R.id.leaderFabelIcon).setOnClickListener(view -> {
-            setBar(Land.Stoerland, stoerland);
-            setBar(Land.Legendeland, legendeland);
-            setBar(Land.Fabelwoud, fabelwoud);
-        });
+        myPoints.setBackgroundColor(User.getLand().getColor());
+        myPoints.setText("Mijn bijdrage: " + User.getPoints());
 
         setBar(Land.Legendeland, legendeland);
         setBar(Land.Stoerland, stoerland);
@@ -93,7 +91,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
                 //Make the bar thinner
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) bar.getLayoutParams();
-                params.setMargins(100, 0, 100, 0);
+                params.setMargins(dimen, 0, dimen, 0);
                 bar.requestLayout();
 
                 //Push the counter down (and the bar along with it)
@@ -110,8 +108,8 @@ public class LeaderboardActivity extends AppCompatActivity {
             }
         });
 
-        if (MainActivity.getUser().getLand().getName().equals(land)) {
-            background.setBackgroundColor(MainActivity.getUser().getLand().getColor());
+        if (User.getLand().getName().equals(land)) {
+            background.setBackgroundColor(User.getLand().getColor());
         } else {
             background.setBackgroundColor(activity.getResources().getColor(R.color.gray));
         }

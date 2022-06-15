@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import com.example.mobielebeleving.Data.Game;
+import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.MQTT.Settings;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             new Thread(() -> {
                 try {
                     while (!canSubscribe) {
-                        Thread.sleep(500);
+                        Thread.sleep(1500);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -166,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 // Check what topic the message is for and handle accordingly
 
+                System.out.println("Topic: " + topic + "\t|\t" + "Message: " + message.toString());
+
                 if (topic.equals("esstelstrijd/users/" + User.getID() + "/points")) {
                     System.out.println("we got here");
                     Toast toastPoints = Toast.makeText(getApplication().getBaseContext(), "Points added to user", Toast.LENGTH_SHORT);
@@ -177,15 +180,21 @@ public class MainActivity extends AppCompatActivity {
                 switch (topic) {
                     //Topic check for each land's points
                     case Settings.topicFabelwoudPoints:
-                        LeaderboardActivity.fabelwoud = Integer.parseInt(message.toString());
+                        LeaderboardActivity.setBar(Land.Legendeland, LeaderboardActivity.legendeland);
+                        LeaderboardActivity.setBar(Land.Stoerland, LeaderboardActivity.stoerland);
+                        LeaderboardActivity.setBar(Land.Fabelwoud, Integer.parseInt(message.toString()));
                         break;
 
                     case Settings.topicLegendelandPoints:
-                        LeaderboardActivity.legendeland = Integer.parseInt(message.toString());
+                        LeaderboardActivity.setBar(Land.Legendeland, Integer.parseInt(message.toString()));
+                        LeaderboardActivity.setBar(Land.Stoerland, LeaderboardActivity.stoerland);
+                        LeaderboardActivity.setBar(Land.Fabelwoud, LeaderboardActivity.fabelwoud);
                         break;
 
                     case Settings.topicStoerlandPoints:
-                        LeaderboardActivity.stoerland = Integer.parseInt(message.toString());
+                        LeaderboardActivity.setBar(Land.Legendeland, LeaderboardActivity.legendeland);
+                        LeaderboardActivity.setBar(Land.Stoerland, Integer.parseInt(message.toString()));
+                        LeaderboardActivity.setBar(Land.Fabelwoud, LeaderboardActivity.fabelwoud);
                         break;
 
                     //Topic check for Droomreis topics
