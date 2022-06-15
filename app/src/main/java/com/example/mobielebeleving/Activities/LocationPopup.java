@@ -40,7 +40,7 @@ public class LocationPopup extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 locationPopup.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int dimension = locationPopup.getWidth() / 10 * 7;
+                int dimension = locationPopup.getWidth() / 10 * 9;
                 getWindow().setLayout(dimension, dimension);
             }
         });

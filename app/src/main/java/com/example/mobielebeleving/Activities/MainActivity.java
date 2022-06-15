@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Using Settings to obtain the deviceID
             user = new User(android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID));
+
             new Thread(() -> {
                 try {
                     while (!canSubscribe) {
@@ -96,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 TopicHandler.runStartupSubscriptions();
             }).start();
         }
-
 
         //Start LandActivity after all startup tasks are completed, unless a Land has already been chosen
         if (user.getLand().getName().equals("null")) {
@@ -115,23 +115,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeGames() {
-        games.add(new Game("Festival Overal",
+        games.add(new Game("Smiley's feest!",
                 "Festival Overal",
-                AppCompatResources.getDrawable(this, R.drawable.game1),
+                AppCompatResources.getDrawable(this, R.drawable.festivaloveral),
                 getResources().getString(R.string.game1story),
                 getResources().getString(R.string.game1explanation),
                 new Point(0, 0)));
 
-        games.add(new Game("Johan en de Eenhoorn",
+        games.add(new Game("Epische strijd",
                 "Johan en de Eenhoorn",
-                AppCompatResources.getDrawable(this, R.drawable.game2),
+                AppCompatResources.getDrawable(this, R.drawable.johanendeeenhoorn),
                 getResources().getString(R.string.game2story),
                 getResources().getString(R.string.game2explanation),
                 new Point(0, 0)));
 
-        games.add(new Game("Droomreis",
+        games.add(new Game("Magische verdediging",
                 "Droomreis",
-                AppCompatResources.getDrawable(this, R.drawable.game3),
+                AppCompatResources.getDrawable(this, R.drawable.droomreis),
                 getResources().getString(R.string.game3story),
                 getResources().getString(R.string.game3explanation),
                 new Point(0, 0)));
