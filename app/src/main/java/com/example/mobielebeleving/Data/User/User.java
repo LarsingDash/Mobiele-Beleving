@@ -6,6 +6,8 @@ import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Achievement.Achievement;
+import com.example.mobielebeleving.MQTT.Settings;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +22,7 @@ import java.util.TreeMap;
 
 public class User {
     public static String ID = "";
-    private int points = 0;
+    public static int points = 0;
     public static Land land;
 
     private Icon icon;
@@ -140,7 +142,7 @@ public class User {
         return icon;
     }
 
-    public int getPoints() {
+    public static int getPoints() {
         return points;
     }
 

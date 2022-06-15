@@ -16,6 +16,12 @@ public class TopicHandler {
         System.out.println("Succesvol");
     }
 
+    public static void subscribeToRetainedTopic(MqttAndroidClient client, final String topic) {
+        // Try to subscribe to the topic
+        IMqttToken token = client.subscribe(topic, 2);
+        System.out.println("Succesvol");
+    }
+
     public static void unsubscribeToTopic(MqttAndroidClient client, final String topic) {
 
         // Try to unsubscribe to the topic
@@ -34,11 +40,16 @@ public class TopicHandler {
         TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, Settings.topicLegendelandPoints);
 
         // Subscribes the user to it's own Points.
-        String name = "esstelstrijd/users/" + User.getID() + "/points";
-        System.out.println(name);
+        String namePoints = "esstelstrijd/users/" + User.getID() + "/points";
+        System.out.println(namePoints);
         String randomNumber = Integer.toString(getRandomNumberUsingNextInt(0, 1000));
         Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/misc/defaultStart", randomNumber);
-        TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, name);
+//        Messenger.publishMessage(Settings.mqttAndroidClient, name, User.getPoints() + "");
+        TopicHandler.subscribeToRetainedTopic(Settings.mqttAndroidClient, namePoints);
+
+//        String nameLand = "esstelstrijd/users/" + User.getID() + "/land";
+//        String land = User.getLand().getName();
+//        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, nameLand, land);
     }
 
     public static void connectToDroom() {
