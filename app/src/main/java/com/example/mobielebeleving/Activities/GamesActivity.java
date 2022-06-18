@@ -12,6 +12,8 @@ import com.example.mobielebeleving.R;
 import com.example.mobielebeleving.Views.GameViewAdapter;
 
 public class GamesActivity extends AppCompatActivity {
+    private static int height = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +28,15 @@ public class GamesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        adapter.spreadOut(height);
+
         //Getting the total height of the recycler view so the items can be spread out
         recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                adapter.spreadOut(recyclerView.getHeight());
+                height = recyclerView.getHeight();
+                adapter.spreadOut(height);
             }
         });
 

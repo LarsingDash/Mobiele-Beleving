@@ -3,7 +3,8 @@ package com.example.mobielebeleving.MQTT;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import info.mqtt.android.service.Ack;
+import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -22,7 +23,7 @@ public class ConnectionHandler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Create the MQTT client, using the URL of the MQTT broker and the client ID
-        Settings.mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), Settings.brokerHostUrl, Settings.clientID);
+        Settings.mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), Settings.brokerHostUrl, Settings.clientID, Ack.AUTO_ACK);
         // Set up callbacks to handle events from the MQTT broker
         Settings.mqttAndroidClient.setCallback(new MqttCallback() {
             @Override

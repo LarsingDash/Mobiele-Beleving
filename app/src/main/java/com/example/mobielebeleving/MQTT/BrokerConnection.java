@@ -1,6 +1,6 @@
 package com.example.mobielebeleving.MQTT;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import info.mqtt.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -15,20 +15,12 @@ public class BrokerConnection {
         options.setUserName(Settings.username);
         options.setPassword(Settings.password.toCharArray());
 
-        try {
-            // Try to connect to the MQTT broker
-            IMqttToken token = client.connect(options);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+        // Try to connect to the MQTT broker
+        IMqttToken token = client.connect(options);
     }
 
     public static void disconnectFromBroker(MqttAndroidClient client) {
-        try {
-            // Try to disconnect from the MQTT broker
-            IMqttToken token = client.disconnect();
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+        // Try to disconnect from the MQTT broker
+        IMqttToken token = client.disconnect();
     }
 }

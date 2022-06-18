@@ -8,16 +8,16 @@ public class Game {
     private final String attraction;
     private final Drawable image;
     private int timer = 0;
-    private final String description;
-    private final int amountOfPoints;
+    private final String story;
+    private final String explanation;
     private final Point location;
 
-    public Game(String name, String attraction, Drawable image, String description, int amountOfPoints, Point location) {
+    public Game(String name, String attraction, Drawable image, String story, String explanation, Point location) {
         this.name = name;
         this.attraction = attraction;
         this.image = image;
-        this.description = description;
-        this.amountOfPoints = amountOfPoints;
+        this.story = story;
+        this.explanation = explanation;
         this.location = location;
     }
 
@@ -37,12 +37,12 @@ public class Game {
         return timer;
     }
 
-    public String getDescription() {
-        return description;
+    public String getStory() {
+        return story;
     }
 
-    public int getAmountOfPoints() {
-        return amountOfPoints;
+    public String getExplanation() {
+        return explanation;
     }
 
     public Point getLocation() {

@@ -1,7 +1,8 @@
 package com.example.mobielebeleving.MQTT;
-import org.eclipse.paho.android.service.MqttAndroidClient;
 
 import java.util.UUID;
+
+import info.mqtt.android.service.MqttAndroidClient;
 
 public class Settings {
 
@@ -29,13 +30,10 @@ public class Settings {
     public static final String topicFestIsAvailable = "esstelstrijd/games/fest/isAvailable";
     public static final String topicFestCurrentUser = "esstelstrijd/games/fest/currentUser";
 
-    //Topics related to Users
-    public static final String topicUsers = "esstelstrijd/users/";
-
     //Topics related to Land's
-    public static final String topicLegendelandPoints = "esstelstrijd/lands/legende/points";
-    public static final String topicFabelwoudPoints = "esstelstrijd/lands/fabel/points";
-    public static final String topicStoerlandPoints = "esstelstrijd/lands/stoer/points";
+    public static final String topicLegendelandPoints = "esstelstrijd/lands/Legenderijk/points";
+    public static final String topicFabelwoudPoints = "esstelstrijd/lands/Fabelwoud/points";
+    public static final String topicStoerlandPoints = "esstelstrijd/lands/Stoerland/points";
 
     //MQTT Andriod Client
     public static MqttAndroidClient mqttAndroidClient;

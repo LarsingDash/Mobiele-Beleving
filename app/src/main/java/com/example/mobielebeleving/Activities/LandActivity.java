@@ -25,20 +25,21 @@ public class LandActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Adding all Lands
-        Collections.addAll(lands, new Land(Land.LegendeLand), new Land(Land.StoerLand), new Land(Land.Fabelwoud));
+        Collections.addAll(lands, new Land("INFO"), new Land(Land.Legendeland), new Land(Land.Stoerland), new Land(Land.Fabelwoud));
 
         //Binding Adapter
         LandAdapter adapter = new LandAdapter(this, lands);
         ViewPager2 pager = findViewById(R.id.landPager);
         pager.setAdapter(adapter);
 
-        //Find all Pages
-        ArrayList<ConstraintLayout> Pages = new ArrayList<>();
-        Collections.addAll(Pages, findViewById(R.id.page1), findViewById(R.id.page2), findViewById(R.id.page3));
+        //Find all pages
+        ArrayList<ConstraintLayout> pages = new ArrayList<>();
+        Collections.addAll(pages, findViewById(R.id.pageInfo), findViewById(R.id.page1), findViewById(R.id.page2), findViewById(R.id.page3));
 
-        //Initialize Pages to gray
-        for (ConstraintLayout page : Pages) {
+        //Initialize pages to gray
+        for (ConstraintLayout page : pages) {
             page.setBackgroundColor(getResources().getColor(R.color.gray));
+            page.setOnClickListener(view -> pager.setCurrentItem(pages.indexOf(page)));
         }
 
         //Get notified when the user changes pages
@@ -48,11 +49,11 @@ public class LandActivity extends AppCompatActivity {
                 super.onPageSelected(position);
 
                 //Change the page the user went to to dark gray, make the others gray
-                for (int i = 0; i < Pages.size(); i++) {
+                for (int i = 0; i < pages.size(); i++) {
                     if (i == position) {
-                        Pages.get(i).setBackgroundColor(getResources().getColor(R.color.dark_gray));
+                        pages.get(i).setBackgroundColor(getResources().getColor(R.color.dark_gray));
                     } else {
-                        Pages.get(i).setBackgroundColor(getResources().getColor(R.color.gray));
+                        pages.get(i).setBackgroundColor(getResources().getColor(R.color.gray));
                     }
                 }
             }
