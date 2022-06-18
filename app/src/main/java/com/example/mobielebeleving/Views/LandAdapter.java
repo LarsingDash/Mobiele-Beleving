@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Land;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
 
 import java.util.ArrayList;
@@ -42,12 +43,17 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
     public void onBindViewHolder(@NonNull LandHolder holder, int position) {
         Land land = lands.get(position);
 
+        if (land.getName().equals("INFO")) holder.button.setVisibility(View.GONE);
+
+
         //Set attributes for all views according to the Land
         holder.layout.setBackgroundColor(land.getColor());
         holder.name.setText(land.getName());
+        holder.story.setText(land.getStory());
         holder.button.setOnClickListener(view -> {
             MainActivity.getUser().setLand(land);
             context.startActivity(new Intent(context, LeaderboardActivity.class));
+            TopicHandler.confirmLandChoice();
             ((Activity) context).finish();
         });
         holder.button.setBackgroundColor(context.getResources().getColor(R.color.white));
@@ -62,6 +68,7 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
     public static class LandHolder extends RecyclerView.ViewHolder {
         ConstraintLayout layout;
         TextView name;
+        TextView story;
         Button button;
 
         public LandHolder(@NonNull View itemView) {
@@ -70,6 +77,7 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
             //Finding all views
             layout = itemView.findViewById(R.id.landLayout);
             name = itemView.findViewById(R.id.landName);
+            story = itemView.findViewById(R.id.landStory);
             button = itemView.findViewById(R.id.landChoose);
         }
     }

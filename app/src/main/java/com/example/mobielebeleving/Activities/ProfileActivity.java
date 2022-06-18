@@ -1,5 +1,7 @@
 package com.example.mobielebeleving.Activities;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static ArrayList<Pronoun> availablePronouns = new ArrayList<>();
     public static ArrayList<Title> availableTitles = new ArrayList<>();
 
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> {
             user.setLand(new Land("null"));
+            Log.println(Log.DEBUG, "DEBUG", "UserData file deleted: " + user.getUserDataFile().delete());
+            Log.println(Log.DEBUG, "DEBUG", "Achievements file deleted: " + user.getAchievementsFile().delete());
             Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
         });
 
@@ -67,6 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         //Make design according to selected land
         ConstraintLayout userLayout = findViewById(R.id.userLayout);
         userLayout.setBackgroundColor(user.getLand().getColor());
+
+        //Help button
+        findViewById(R.id.helpButton).setOnClickListener(view -> startActivity(new Intent(this, HelpPopup.class)));
     }
 
     private void makeIconButtons() {
@@ -101,6 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.println(Log.DEBUG, "DEBUG", "I: " + i);
         user.setIcon(availableIcons.get(i));
         icon.setImageDrawable(user.getIcon().getIcon());
+        TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, "esstelstrijd/users/defaultUser");
         });
     }
 

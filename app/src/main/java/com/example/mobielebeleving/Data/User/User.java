@@ -6,6 +6,8 @@ import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Achievement.Achievement;
+import com.example.mobielebeleving.MQTT.Settings;
+import com.example.mobielebeleving.MQTT.TopicHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,9 +21,9 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class User {
-    private final String ID;
-    private int points;
-    private Land land;
+    public static String ID = "";
+    public static int points = 0;
+    public static Land land;
 
     private Icon icon;
     private Pronoun pronoun;
@@ -82,11 +84,13 @@ public class User {
             icon = MainActivity.icons.get(Integer.parseInt(scanner.nextLine()));
             pronoun = Pronoun.valueOf(scanner.nextLine());
             title = Title.valueOf(scanner.nextLine());
+            points = Integer.parseInt(scanner.nextLine());
         } catch (FileNotFoundException e) {
             land = new Land("null");
             icon = MainActivity.icons.get(0);
             pronoun = Pronoun.Dappere;
             title = Title.Ridder;
+            points = 0;
             writeUserData();
 
             //Debugging
@@ -103,12 +107,14 @@ public class User {
             1
             Dappere
             Ridder
+            0
              */
 
             writer.write(land.getName() + "\n");
             writer.write(icon.getID() + "\n");
             writer.write(pronoun.name() + "\n");
-            writer.write(title.name());
+            writer.write(title.name() + "\n");
+            writer.write(points + "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,7 +123,7 @@ public class User {
     private void createAchievements() {
         achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(1))), "Welkom!", "Start het spel op", "Reward 1"));
         achievements.put("Profiel", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Magische, Pronoun.Slimme, Title.Fee, Title.Clown, MainActivity.icons.get(2))), "Profiel", "Navigeer naar jouw profiel", "Reward 2"));
-        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "jebollemama", "Reward 3"));
+        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "Debug", "Reward 3"));
         achievements.put("Avonturier", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(0))), "Avonturier", "Bekijk de details van een spel", "Ontdekkende - Avonturier"));
         }
 
@@ -128,7 +134,7 @@ public class User {
         }
     }
 
-    public String getID() {
+    public static String getID() {
         return ID;
     }
 
@@ -136,13 +142,14 @@ public class User {
         return icon;
     }
 
-    public int getPoints() {
+    public static int getPoints() {
         return points;
     }
 
     public void setPoints(int points) {
         this.points = points;
         LeaderboardActivity.myPoints.setText("Mijn bijdrage: " + points);
+        writeUserData();
     }
 
     public Pronoun getPronoun() {
@@ -172,12 +179,20 @@ public class User {
         writeUserData();
     }
 
-    public Land getLand() {
+    public static Land getLand() {
         return land;
     }
 
     public void setLand(Land land) {
         this.land = land;
         writeUserData();
+    }
+
+    public File getAchievementsFile() {
+        return achievementsFile;
+    }
+
+    public File getUserDataFile() {
+        return userDataFile;
     }
 }

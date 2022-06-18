@@ -18,12 +18,21 @@
         app:layout_constraintBottom_toTopOf="@id/page1"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/page1"
+        android:id="@+id/pageInfo"
         android:layout_width="50dp"
         android:layout_height="10dp"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/page1"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/page1"
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pageInfo"
         app:layout_constraintEnd_toStartOf="@id/page2"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

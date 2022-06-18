@@ -1,17 +1,17 @@
 package com.example.mobielebeleving.Views;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.res.Configuration;
+import android.media.VolumeShaper;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.example.mobielebeleving.Activities.GamesActivity;
 import com.example.mobielebeleving.Activities.LeaderboardActivity;
@@ -22,35 +22,64 @@ import com.example.mobielebeleving.R;
 import java.util.Objects;
 
 public class MenuBar extends LinearLayout {
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    @SuppressLint("UseCompatLoadingForDrawables")
+    private static int width = 0;
+    private static int height = 0;
 
     public MenuBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        setOrientation(LinearLayout.HORIZONTAL);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setOrientation(HORIZONTAL);
+        } else {
+            setOrientation(VERTICAL);
+        }
         //Set color according to Land
         setBackgroundColor(MainActivity.getUser().getLand().getColor());
 
-        //Define width to spread out the buttons
-        DisplayMetrics metrics = new DisplayMetrics();
-        context.getDisplay().getMetrics(metrics);
-        int width = metrics.widthPixels / 3;
+        //Find all buttons
+        ImageView gamesButton = new ImageView(context, attrs);
+        ImageView leaderboardButton = new ImageView(context, attrs);
+        ImageView profileButton = new ImageView(context, attrs);
+
+        //Spread out the buttons
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                width = getWidth();
+                height = getHeight();
+
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    gamesButton.setMinimumWidth(width / 3);
+                    leaderboardButton.setMinimumWidth(width / 3);
+                    profileButton.setMinimumWidth(width / 3);
+                } else {
+                    gamesButton.setMinimumHeight(height / 3);
+                    leaderboardButton.setMinimumHeight(height / 3);
+                    profileButton.setMinimumHeight(height / 3);
+                }
+            }
+        });
 
         //Define attributes of all buttons
-        ImageView gamesButton = new ImageView(context, attrs);
-        gamesButton.setImageDrawable(context.getDrawable(R.drawable.games_icon));
-        gamesButton.setMinimumWidth(width);
+        gamesButton.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.games_icon));
         addView(gamesButton);
 
-        ImageView leaderboardButton = new ImageView(context, attrs);
-        leaderboardButton.setImageDrawable(context.getDrawable(R.drawable.leaderboard_icon));
-        leaderboardButton.setMinimumWidth(width);
+        leaderboardButton.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.leaderboard_icon));
         addView(leaderboardButton);
 
-        ImageView profileButton = new ImageView(context, attrs);
-        profileButton.setImageDrawable(context.getDrawable(R.drawable.profile_icon));
-        profileButton.setMinimumWidth(width);
+        profileButton.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.profile_icon));
         addView(profileButton);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            gamesButton.setMinimumWidth(width / 3);
+            leaderboardButton.setMinimumWidth(width / 3);
+            profileButton.setMinimumWidth(width / 3);
+        } else {
+            gamesButton.setMinimumHeight(height / 3);
+            leaderboardButton.setMinimumHeight(height / 3);
+            profileButton.setMinimumHeight(height / 3);
+        }
 
         //Click actions
         gamesButton.setOnClickListener(view -> {

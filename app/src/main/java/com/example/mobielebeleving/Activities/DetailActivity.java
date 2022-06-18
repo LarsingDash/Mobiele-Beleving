@@ -1,6 +1,8 @@
 package com.example.mobielebeleving.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,10 +26,21 @@ public class DetailActivity extends AppCompatActivity {
         ((ImageView) findViewById(R.id.detailGamePhoto)).setImageDrawable(game.getImage());
         ((TextView) findViewById(R.id.detailGameName)).setText(game.getName());
         ((TextView) findViewById(R.id.detailGameAttraction)).setText(game.getAttraction());
-        ((TextView) findViewById(R.id.detailGameDescription)).setText(game.getDescription());
 
+        //Use HTML to get a part of the TextView in Bold and the other not
+        String description = "<b>Verhaal</b><br>" + game.getStory() + "<br><br><b>Uitleg</b><br>" + game.getExplanation();
+        ((TextView) findViewById(R.id.detailGameDescription)).setText(Html.fromHtml(description));
+
+        //Set colors according to land
         int color = MainActivity.getUser().getLand().getColor();
         findViewById(R.id.topPart).setBackgroundColor(color);
         findViewById(R.id.locationButton).setBackgroundColor(color);
+
+        //Location button popup
+        findViewById(R.id.locationButton).setOnClickListener(view -> {
+            Intent intent = new Intent(this, LocationPopup.class);
+            intent.putExtra("game", game.getName());
+            startActivity(intent);
+        });
     }
 }

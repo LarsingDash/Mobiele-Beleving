@@ -6,6 +6,7 @@ pluginManagement {
             maven {
                 url "https://repo.eclipse.org/content/repositories/paho-releases/"
             }
+        maven { url 'https://jitpack.io' }
     }
 }
 dependencyResolutionManagement {
@@ -13,6 +14,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://repo.eclipse.org/content/repositories/paho-releases/" }
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "Mobiele Beleving"
