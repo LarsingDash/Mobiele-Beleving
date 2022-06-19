@@ -38,7 +38,7 @@ public class Messenger {
             MqttMessage message = new MqttMessage(encodedPayload);
 
             // Set parameters for the message
-            message.setQos(2);
+            message.setQos(0);
             message.setRetained(true);
 
             // Publish the message via the MQTT broker
