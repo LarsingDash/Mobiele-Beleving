@@ -26,7 +26,7 @@ public class LocationPopup extends AppCompatActivity {
 
         ImageView image = findViewById(R.id.location);
         switch (getIntent().getExtras().getString("game")) {
-            case "Smiley's feest!":
+            case "Smiley's feest":
                 image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.festival_location));
                 break;
 
@@ -36,6 +36,7 @@ public class LocationPopup extends AppCompatActivity {
 
             case "Magische verdediging":
                 image.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.droomreis_location));
+                break;
         }
 
         ConstraintLayout locationPopup = findViewById(R.id.locationPopup);
