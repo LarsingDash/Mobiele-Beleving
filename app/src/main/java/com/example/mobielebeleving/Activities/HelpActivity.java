@@ -1,5 +1,7 @@
 package com.example.mobielebeleving.Activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -26,7 +28,6 @@ public class HelpActivity extends AppCompatActivity {
         findViewById(R.id.helpBackButton).setBackgroundColor(color);
         findViewById(R.id.helpBackButton).setOnClickListener(view -> finish());
 
-
         findViewById(R.id.debugData).setOnClickListener(view -> {
             Log.println(Log.DEBUG, "DEBUG", "UserData file deleted: " + MainActivity.getUser().getUserDataFile().delete());
             Log.println(Log.DEBUG, "DEBUG", "Achievements file deleted: " + MainActivity.getUser().getAchievementsFile().delete());
@@ -45,5 +46,9 @@ public class HelpActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.helpDebug).setBackgroundColor(color);
+
+        findViewById(R.id.helpLink).setOnClickListener(view -> {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.freepik.com/vectors/castle-background%27%3ECastle")));
+        });
     }
 }
