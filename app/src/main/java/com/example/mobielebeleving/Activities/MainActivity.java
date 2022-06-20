@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                             toastDroom.show();
 
                             TopicHandler.linkToDroom();
-                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Magische Verdediging")).collect(false);
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Magische verdediging")).collect(false);
                         } else {
                             Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Spel al in gebruik.", Toast.LENGTH_SHORT);
                             toastDroom.show();
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             TopicHandler.linkToJede();
-                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Epische Strijd")).collect(false);
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Epische strijd")).collect(false);
                         } else {
                             Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Spel al in gebruik.", Toast.LENGTH_SHORT);
                             toastJede.show();
