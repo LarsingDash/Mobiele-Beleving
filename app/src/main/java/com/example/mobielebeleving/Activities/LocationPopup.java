@@ -13,12 +13,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.mobielebeleving.R;
 
+import java.util.Objects;
+
 public class LocationPopup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_popup);
+
+        Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Locatie")).collect(false);
 
         ImageView image = findViewById(R.id.location);
         switch (getIntent().getExtras().getString("game")) {

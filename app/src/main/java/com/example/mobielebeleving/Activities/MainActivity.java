@@ -39,6 +39,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import info.mqtt.android.service.Ack;
 import info.mqtt.android.service.MqttAndroidClient;
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeGames() {
-        games.add(new Game("Smiley's feest!",
+        games.add(new Game("Smiley's feest",
                 "Festival Overal",
                 AppCompatResources.getDrawable(this, R.drawable.festivaloveral),
                 getResources().getString(R.string.game1story),
@@ -208,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
                         if (message.toString().equals("yes")) {
                             Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
                             toastDroom.show();
+
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Magische Verdediging")).collect(false);
+
                             TopicHandler.linkToDroom();
                         } else {
                             Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
@@ -220,6 +224,9 @@ public class MainActivity extends AppCompatActivity {
                         if (message.toString().equals("yes")) {
                             Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
                             toastJede.show();
+
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Epische Strijd")).collect(false);
+
                             TopicHandler.linkToJede();
                         } else {
                             Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
@@ -232,6 +239,9 @@ public class MainActivity extends AppCompatActivity {
                         if (message.toString().equals("yes")) {
                             Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
                             toastFest.show();
+
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Smiley's feest")).collect(false);
+
                             TopicHandler.linkToFest();
                         } else {
                             Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
