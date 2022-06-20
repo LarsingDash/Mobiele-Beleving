@@ -44,7 +44,7 @@ public class TopicHandler {
         System.out.println(namePoints);
         String randomNumber = Integer.toString(getRandomNumberUsingNextInt(0, 1000));
         Messenger.publishMessage(Settings.mqttAndroidClient, "esstelstrijd/misc/defaultStart", randomNumber);
-        Messenger.publishMessage(Settings.mqttAndroidClient, namePoints, User.getPoints() + "");
+//        Messenger.publishMessage(Settings.mqttAndroidClient, namePoints, User.getPoints() + "");
         TopicHandler.subscribeToTopic(Settings.mqttAndroidClient, namePoints);
 
         if (User.getLand().getName() != null) {
@@ -94,5 +94,21 @@ public class TopicHandler {
         Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicFestIsAvailable, "no");
         TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicFestCurrentUser);
         Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicFestCurrentUser, User.getID());
+    }
+
+    public static void dayCycle() {
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable, "yes");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFestIsAvailable, "yes");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicJedeIsAvailable, "yes");
+
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, "esstelstrijd/users/" + User.getID() + "/points", "0");
+
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicLegendelandPoints, "0");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFabelwoudPoints, "0");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicStoerlandPoints, "0");
+
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicDroomCurrentUser, "default");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFestCurrentUser, "default");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicJedeCurrentUser, "default");
     }
 }

@@ -69,7 +69,7 @@ public class GameViewAdapter extends RecyclerView.Adapter<GameViewAdapter.GameVi
     private void click(int position) {
         //Start DetailActivity
         context.startActivity(new Intent(context, DetailActivity.class).putExtra("index", position));
-        Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Avonturier")).collect(false);
+        Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Detail")).collect(false);
         ((Activity) context).finish();
     }
 
