@@ -1,13 +1,11 @@
 package com.example.mobielebeleving.Activities;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.mobielebeleving.Data.User.User;
 import com.example.mobielebeleving.R;
 
 public class HelpPopup extends AppCompatActivity {
@@ -16,15 +14,11 @@ public class HelpPopup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_popup);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        ConstraintLayout helpPopup = findViewById(R.id.helpPopup);
-        helpPopup.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onGlobalLayout() {
-                helpPopup.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                getWindow().setLayout(helpPopup.getWidth() / 10 * 8, helpPopup.getHeight() / 10 * 7);
-            }
-        });
+        findViewById(R.id.infoScroll).setBackgroundColor(User.getLand().getColor());
+        findViewById(R.id.helpBackButton).setBackgroundColor(User.getLand().getColor());
+
+        findViewById(R.id.helpBackButton).setOnClickListener(view -> finish());
     }
 }

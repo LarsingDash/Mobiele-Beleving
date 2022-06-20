@@ -1,5 +1,6 @@
 package com.example.mobielebeleving.Activities;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
@@ -39,7 +40,14 @@ public class LocationPopup extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 locationPopup.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int dimension = (int) (locationPopup.getWidth() / 10 * 9.5d);
+                int dimension;
+
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    dimension = (int) (locationPopup.getWidth() / 10 * 9.5d);
+                } else {
+                    dimension = (int) (locationPopup.getHeight() / 10 * 9.5d);
+                }
+
                 getWindow().setLayout(dimension, dimension);
             }
         });
