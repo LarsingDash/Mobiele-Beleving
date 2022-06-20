@@ -8,5 +8,9 @@ public enum Pronoun implements AchievementTarget {
     Slimme,
     Dappere,
     Mysterieuze,
-    Ontdekkende
+    Ontdekkende,
+    Boze,
+    Kleine,
+    Grote,
+    Fantastische
 }

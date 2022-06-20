@@ -113,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
         icons.put(1, new Icon(1, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon2)));
         icons.put(2, new Icon(2, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon3)));
         icons.put(3, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon4)));
+        icons.put(4, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon5)));
+        icons.put(5, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon6)));
+        icons.put(6, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon7)));
+        icons.put(7, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon8)));
+        icons.put(8, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon9)));
+        icons.put(9, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon91)));
     }
 
     private void makeGames() {

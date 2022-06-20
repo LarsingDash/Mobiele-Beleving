@@ -7,5 +7,11 @@ public enum Title implements AchievementTarget {
     Troll,
     Fee,
     Clown,
-    Avonturier
+    Avonturier,
+    Draak,
+    Koning,
+    Koningin,
+    Wolf,
+    Heks,
+    Tovenaar
 }
