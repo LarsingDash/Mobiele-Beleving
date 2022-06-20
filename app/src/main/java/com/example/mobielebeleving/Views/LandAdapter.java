@@ -20,6 +20,7 @@ import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
     private final Context context;
@@ -50,12 +51,32 @@ public class LandAdapter extends RecyclerView.Adapter<LandAdapter.LandHolder> {
         holder.layout.setBackgroundColor(land.getColor());
         holder.name.setText(land.getName());
         holder.story.setText(land.getStory());
+
         holder.button.setOnClickListener(view -> {
+            //Achievement
+            switch (land.getName()) {
+                case Land.Legendeland:
+                    Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Legende")).collect(false);
+                    break;
+
+                case Land.Stoerland:
+                    Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Stoer")).collect(false);
+                    break;
+
+                case Land.Fabelwoud:
+                    Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Fabel")).collect(false);
+                    break;
+            }
+
+            //Setting Land
             MainActivity.getUser().setLand(land);
             context.startActivity(new Intent(context, LeaderboardActivity.class));
             TopicHandler.confirmLandChoice();
+
+            //Finish
             ((Activity) context).finish();
         });
+
         holder.button.setBackgroundColor(context.getResources().getColor(R.color.white));
         holder.button.setTextColor(land.getColor());
     }

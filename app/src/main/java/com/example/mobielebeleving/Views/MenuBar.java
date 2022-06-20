@@ -84,7 +84,6 @@ public class MenuBar extends LinearLayout {
         //Click actions
         gamesButton.setOnClickListener(view -> {
             click(context, GamesActivity.class);
-            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Debug")).collect(false);
         });
         leaderboardButton.setOnClickListener(view -> click(context, LeaderboardActivity.class));
         profileButton.setOnClickListener(view -> {

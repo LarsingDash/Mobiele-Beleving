@@ -11,14 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.Pronoun;
 import com.example.mobielebeleving.Data.User.Title;
@@ -47,13 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = MainActivity.getUser();
 
-        ((TextView) findViewById(R.id.userID)).setOnClickListener(view -> {
-            user.setLand(new Land("null"));
-            Log.println(Log.DEBUG, "DEBUG", "UserData file deleted: " + user.getUserDataFile().delete());
-            Log.println(Log.DEBUG, "DEBUG", "Achievements file deleted: " + user.getAchievementsFile().delete());
-            Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
-        });
-
         //Set initial values for Icon and UserID
         ImageView icon = findViewById(R.id.profileIcon);
         icon.setImageDrawable(user.getIcon().getIcon());
@@ -75,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         userLayout.setBackgroundColor(user.getLand().getColor());
 
         //Help button
-        findViewById(R.id.helpButton).setOnClickListener(view -> startActivity(new Intent(this, HelpPopup.class)));
+        findViewById(R.id.helpButton).setOnClickListener(view -> startActivity(new Intent(this, HelpActivity.class)));
     }
 
     private void makeIconButtons() {

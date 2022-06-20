@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="loading_screen_photo">Loading screen photo</string>
-    <string name="games_button">gamesButton</string>
-    <string name="leaderBoard_button">leaderboardButton</string>
-    <string name="profile_button">profileButton</string>
-    <string name="game_description">gameDescription</string>
-    <string name="game_preview_photo">Game Preview Photo</string>
-    <string name="game_detail_scroll_view">gameDetailScrollView</string>
-    <string name="location_image">locationImage</string>
-    <string name="help_button">helpButton</string>
+    <string name="loading_screen_photo" translatable="false">Loading screen photo</string>
+    <string name="games_button" translatable="false">gamesButton</string>
+    <string name="leaderBoard_button" translatable="false">leaderboardButton</string>
+    <string name="profile_button" translatable="false">profileButton</string>
+    <string name="game_description" translatable="false">gameDescription</string>
+    <string name="game_preview_photo" translatable="false">Game Preview Photo</string>
+    <string name="game_detail_scroll_view" translatable="false">gameDetailScrollView</string>
+    <string name="location_image" translatable="false">locationImage</string>
+    <string name="help_button" translatable="false">helpButton</string>
+    <string name="helpbackbutton" translatable="false">HelpBackButton</string>
 </resources>

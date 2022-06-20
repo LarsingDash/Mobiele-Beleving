@@ -6,8 +6,6 @@ import com.example.mobielebeleving.Activities.LeaderboardActivity;
 import com.example.mobielebeleving.Activities.MainActivity;
 import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Achievement.Achievement;
-import com.example.mobielebeleving.MQTT.Settings;
-import com.example.mobielebeleving.MQTT.TopicHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,7 +55,7 @@ public class User {
             printForDebug();
         } catch (FileNotFoundException e) {
             //In case the file does not exist = collect default achievement(s)
-            Objects.requireNonNull(achievements.get("Welkom!")).collect(true);
+            Objects.requireNonNull(achievements.get("Welkom")).collect(true);
 
             //Debugging
             Log.println(Log.DEBUG, "DEBUG", "Achievement file did not exist");
@@ -121,10 +119,78 @@ public class User {
     }
 
     private void createAchievements() {
-        achievements.put("Welkom!", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Dappere, Pronoun.Stoere, Title.Ridder, Title.Troll, MainActivity.icons.get(1))), "Welkom!", "Start het spel op", "Reward 1"));
-        achievements.put("Profiel", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Magische, Pronoun.Slimme, Title.Fee, Title.Clown, MainActivity.icons.get(2))), "Profiel", "Navigeer naar jouw profiel", "Reward 2"));
-        achievements.put("Debug", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, MainActivity.icons.get(3))), "Debug", "Debug", "Reward 3"));
-        achievements.put("Avonturier", new Achievement(this, new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(0))), "Avonturier", "Bekijk de details van een spel", "Ontdekkende - Avonturier"));
+        //Lands
+        achievements.put("Legende",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Boze, Title.Beest, MainActivity.icons.get(9))),
+                        "Legendeland",
+                        "Selecteer Legendeland",
+                        "Boze - Beest"));
+
+        achievements.put("Stoer",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Stoere, Title.Piraat, MainActivity.icons.get(8))),
+                        "Stoerland",
+                        "Selecteer Stoerland",
+                        "Stoere - Piraat"));
+
+        achievements.put("Fabel",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Kleine, Title.Dwerg, MainActivity.icons.get(7))),
+                        "Fabelwoud",
+                        "Selecteer Fabelwoud",
+                        "Kleine - Dwerg"));
+
+        //Games
+        achievements.put("Smiley's feest",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Mysterieuze, Title.Tovernaar, MainActivity.icons.get(5))),
+                        "Smiley's feest",
+                        "Speel het spel: Smiley's feest",
+                        "Mysterieuze - Tovenaar"));
+
+        achievements.put("Epische strijd",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Dappere, Title.Ridder, MainActivity.icons.get(3))),
+                        "Epische strijd",
+                        "Speel het spel: Epische Strijd",
+                        "Dappere - Ridder"));
+
+        achievements.put("Magische verdediging",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Magische, Title.Heks, MainActivity.icons.get(6))),
+                        "Magische verdediging",
+                        "Speel het spel: Magische verdediging",
+                        "Magische - Heks"));
+
+        //Screens
+        achievements.put("Welkom",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Grote, Title.Koning, MainActivity.icons.get(0))),
+                        "Welkom",
+                        "Start de app voor het eerst op",
+                        "Grote - Koning"));
+
+        achievements.put("Profiel",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Fantastische, Title.Koningin, MainActivity.icons.get(1))),
+                        "Profiel",
+                        "Bekijk je eigen profiel",
+                        "Fantastische - Koningin"));
+
+        achievements.put("Detail",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Slimme, Title.Holbewoner, MainActivity.icons.get(4))),
+                        "Detail",
+                        "Bekijk de details van een spel",
+                        "Slimme - Holbewoner"));
+
+        achievements.put("Locatie",
+                new Achievement(this,
+                        new ArrayList<>(Arrays.asList(Pronoun.Ontdekkende, Title.Avonturier, MainActivity.icons.get(2))),
+                        "Locatie",
+                        "Bekijk de locatie van een spel",
+                        "Ontdekkende - Avonturier"));
         }
 
     private void printForDebug() {

@@ -33,8 +33,8 @@ public class Land {
                 break;
 
             default:
-                story = MainActivity.context.getResources().getString(R.string.game1story);
-                color = MainActivity.context.getResources().getColor(R.color.dark_gray);
+                story = MainActivity.context.getResources().getString(R.string.landInfo);
+                color = MainActivity.context.getResources().getColor(R.color.really_dark_gray);
         }
     }
 

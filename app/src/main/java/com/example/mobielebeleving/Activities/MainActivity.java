@@ -39,6 +39,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import info.mqtt.android.service.Ack;
 import info.mqtt.android.service.MqttAndroidClient;
@@ -113,10 +114,16 @@ public class MainActivity extends AppCompatActivity {
         icons.put(1, new Icon(1, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon2)));
         icons.put(2, new Icon(2, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon3)));
         icons.put(3, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon4)));
+        icons.put(4, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon5)));
+        icons.put(5, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon6)));
+        icons.put(6, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon7)));
+        icons.put(7, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon8)));
+        icons.put(8, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon9)));
+        icons.put(9, new Icon(3, AppCompatResources.getDrawable(MainActivity.context, R.drawable.icon91)));
     }
 
     private void makeGames() {
-        games.add(new Game("Smiley's feest!",
+        games.add(new Game("Smiley's feest",
                 "Festival Overal",
                 AppCompatResources.getDrawable(this, R.drawable.festivaloveral),
                 getResources().getString(R.string.game1story),
@@ -170,8 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Topic: " + topic + "\t|\t" + "Message: " + message.toString());
 
                 if (topic.equals("esstelstrijd/users/" + User.getID() + "/points")) {
-                    System.out.println("we got here");
-                    Toast toastPoints = Toast.makeText(getApplication().getBaseContext(), "Points added to user", Toast.LENGTH_SHORT);
+                    Toast toastPoints = Toast.makeText(getApplication().getBaseContext(), "Score bijgewerkt.", Toast.LENGTH_SHORT);
                     toastPoints.show();
                     int points = parseInt(message.toString());
                     user.setPoints(points);
@@ -200,11 +206,13 @@ public class MainActivity extends AppCompatActivity {
                     //Topic check for Droomreis topics
                     case Settings.topicDroomIsAvailable:
                         if (message.toString().equals("yes")) {
-                            Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                            Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Spel starten..", Toast.LENGTH_SHORT);
                             toastDroom.show();
+
                             TopicHandler.linkToDroom();
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Magische verdediging")).collect(false);
                         } else {
-                            Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
+                            Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Spel al in gebruik.", Toast.LENGTH_SHORT);
                             toastDroom.show();
                         }
                         break;
@@ -212,11 +220,14 @@ public class MainActivity extends AppCompatActivity {
                         //Topic check for Johan en de Eenhoorn topics
                     case Settings.topicJedeIsAvailable:
                         if (message.toString().equals("yes")) {
-                            Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                            Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Spel starten..", Toast.LENGTH_SHORT);
                             toastJede.show();
+
+
                             TopicHandler.linkToJede();
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Epische strijd")).collect(false);
                         } else {
-                            Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
+                            Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Spel al in gebruik.", Toast.LENGTH_SHORT);
                             toastJede.show();
                         }
                         break;
@@ -224,11 +235,14 @@ public class MainActivity extends AppCompatActivity {
                         //Topic check for Festival topics
                     case Settings.topicFestIsAvailable:
                         if (message.toString().equals("yes")) {
-                            Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                            Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Spel starten..", Toast.LENGTH_SHORT);
                             toastFest.show();
+
+
                             TopicHandler.linkToFest();
+                            Objects.requireNonNull(MainActivity.getUser().getAchievements().get("Smiley's feest")).collect(false);
                         } else {
-                            Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Game already in use, try again later.", Toast.LENGTH_SHORT);
+                            Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Spel al in gebruik.", Toast.LENGTH_SHORT);
                             toastFest.show();
                         }
                         break;
@@ -243,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
     public void NFCStart(){
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
-            Toast.makeText(this, "this device does not support NFC", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Dit toestel ondersteunt geen NFC", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -292,19 +306,19 @@ public class MainActivity extends AppCompatActivity {
         switch (text) {
             case "Droomreis Activation TAG":
                 TopicHandler.connectToDroom();
-                Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                Toast toastDroom = Toast.makeText(getApplication().getBaseContext(), "Verbinden met spel..", Toast.LENGTH_SHORT);
                 toastDroom.show();
                 break;
 
             case "Johan en de Eenhoorn Activation TAG":
                 TopicHandler.connectToJede();
-                Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                Toast toastJede = Toast.makeText(getApplication().getBaseContext(), "Verbinden met spel..", Toast.LENGTH_SHORT);
                 toastJede.show();
                 break;
 
             case "Festival Activation TAG":
                 TopicHandler.connectToFest();
-                Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Connecting to game", Toast.LENGTH_SHORT);
+                Toast toastFest = Toast.makeText(getApplication().getBaseContext(), "Verbinden met spel..", Toast.LENGTH_SHORT);
                 toastFest.show();
                 break;
 
