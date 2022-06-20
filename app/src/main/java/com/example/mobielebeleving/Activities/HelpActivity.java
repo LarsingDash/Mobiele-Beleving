@@ -31,18 +31,18 @@ public class HelpActivity extends AppCompatActivity {
         findViewById(R.id.debugData).setOnClickListener(view -> {
             Log.println(Log.DEBUG, "DEBUG", "UserData file deleted: " + MainActivity.getUser().getUserDataFile().delete());
             Log.println(Log.DEBUG, "DEBUG", "Achievements file deleted: " + MainActivity.getUser().getAchievementsFile().delete());
-            Toast.makeText(this, "Data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "[DEBUG]: Data reset.]", Toast.LENGTH_SHORT).show();
         });
 
         findViewById(R.id.debugLand).setOnClickListener(view -> {
             MainActivity.getUser().setLand(new Land("null"));
-            Toast.makeText(this, "Land", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "[DEBUG] Land reset.]", Toast.LENGTH_SHORT).show();
         });
         findViewById(R.id.debugDay).setOnClickListener(view -> {
             TopicHandler.dayCycle();
             MainActivity.getUser().setLand(new Land("null"));
             MainActivity.getUser().setPoints(0);
-            Toast.makeText(this, "Day", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "[DEBUG] Dag reset.", Toast.LENGTH_SHORT).show();
         });
 
         findViewById(R.id.helpDebug).setBackgroundColor(color);
