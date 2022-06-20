@@ -95,4 +95,20 @@ public class TopicHandler {
         TopicHandler.unsubscribeToTopic(Settings.mqttAndroidClient, Settings.topicFestCurrentUser);
         Messenger.publishMessage(Settings.mqttAndroidClient, Settings.topicFestCurrentUser, User.getID());
     }
+
+    public static void dayCycle() {
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicDroomIsAvailable, "yes");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFestIsAvailable, "yes");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicJedeIsAvailable, "yes");
+
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, "esstelstrijd/users/" + User.getID() + "/points", "0");
+
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicLegendelandPoints, "0");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFabelwoudPoints, "0");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicStoerlandPoints, "0");
+
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicDroomCurrentUser, "default");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFestCurrentUser, "default");
+        Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicJedeCurrentUser, "default");
+    }
 }

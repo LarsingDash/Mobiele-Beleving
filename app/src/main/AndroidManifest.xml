@@ -23,7 +23,7 @@
         android:theme="@style/Theme.MobieleBeleving">
 
         <activity
-            android:name=".Activities.HelpPopup"
+            android:name=".Activities.HelpActivity"
             android:theme="@style/Popup" />
         <activity
             android:name=".Activities.LocationPopup"
