@@ -11,14 +11,16 @@ public class Game {
     private final String story;
     private final String explanation;
     private final Point location;
+    private final Drawable gameIcon;
 
-    public Game(String name, String attraction, Drawable image, String story, String explanation, Point location) {
+    public Game(String name, String attraction, Drawable image, String story, String explanation, Point location, Drawable gameIcon) {
         this.name = name;
         this.attraction = attraction;
         this.image = image;
         this.story = story;
         this.explanation = explanation;
         this.location = location;
+        this.gameIcon = gameIcon;
     }
 
     public String getName() {
@@ -47,5 +49,9 @@ public class Game {
 
     public Point getLocation() {
         return location;
+    }
+
+    public Drawable getGameIcon() {
+        return gameIcon;
     }
 }

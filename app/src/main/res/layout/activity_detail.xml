@@ -44,21 +44,6 @@
                 app:srcCompat="@drawable/droomreis" />
 
             <TextView
-                android:id="@+id/detailGameName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:text="game name"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/detailGameAttraction"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detailGamePhoto" />
-
-            <TextView
                 android:id="@+id/detailGameAttraction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +55,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/detailGameName"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailGamePhoto" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,39 +66,81 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topPart">
+            app:layout_constraintTop_toBottomOf="@id/topPart"
+            android:background="@color/white">
 
-            <ScrollView
-                android:background="@color/gray"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="15dp"
-                app:layout_constraintBottom_toTopOf="@+id/locationButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/detailGameDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="game description"
-                    android:textAlignment="center"/>
-            </ScrollView>
-
-            <Button
+            <ImageButton
                 android:id="@+id/locationButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:text="@string/bekijk_locatie"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@android:drawable/ic_menu_search"
+                android:background="@color/white"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                />
+
+            <ImageView
+                android:id="@+id/detailPlusOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="30dp"
+                android:contentDescription="@string/game_preview_photo"
+                android:scaleX="0.4"
+                android:scaleY="0.4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/droomreis" />
+
+            <ImageView
+                android:id="@+id/detailPlusTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:contentDescription="@string/game_preview_photo"
+                android:scaleX="0.4"
+                android:scaleY="0.4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.938"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/droomreis" />
+
+            <ImageView
+                android:id="@+id/detailPlusThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="256dp"
+                android:contentDescription="@string/game_preview_photo"
+                android:scaleX="0.4"
+                android:scaleY="0.4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/droomreis" />
+
+            <ImageView
+                android:id="@+id/detailPlusFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="256dp"
+                android:contentDescription="@string/game_preview_photo"
+                android:scaleX="0.4"
+                android:scaleY="0.4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.938"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/droomreis" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

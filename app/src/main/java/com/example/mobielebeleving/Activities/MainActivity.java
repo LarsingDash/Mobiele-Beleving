@@ -26,6 +26,7 @@ import com.example.mobielebeleving.Data.Game;
 import com.example.mobielebeleving.Data.Land;
 import com.example.mobielebeleving.Data.User.Icon;
 import com.example.mobielebeleving.Data.User.User;
+import com.example.mobielebeleving.MQTT.Messenger;
 import com.example.mobielebeleving.MQTT.Settings;
 import com.example.mobielebeleving.MQTT.TopicHandler;
 import com.example.mobielebeleving.R;
@@ -128,21 +129,21 @@ public class MainActivity extends AppCompatActivity {
                 AppCompatResources.getDrawable(this, R.drawable.festivaloveral),
                 getResources().getString(R.string.game1story),
                 getResources().getString(R.string.game1explanation),
-                new Point(0, 0)));
+                new Point(0, 0), AppCompatResources.getDrawable(this, R.drawable.legendeicon)));
 
         games.add(new Game("Epische strijd",
                 "Johan en de Eenhoorn",
                 AppCompatResources.getDrawable(this, R.drawable.johanendeeenhoorn),
                 getResources().getString(R.string.game2story),
                 getResources().getString(R.string.game2explanation),
-                new Point(0, 0)));
+                new Point(0, 0), AppCompatResources.getDrawable(this, R.drawable.stoericon)));
 
         games.add(new Game("Magische verdediging",
                 "Droomreis",
                 AppCompatResources.getDrawable(this, R.drawable.droomreis),
                 getResources().getString(R.string.game3story),
                 getResources().getString(R.string.game3explanation),
-                new Point(0, 0)));
+                new Point(0, 0), AppCompatResources.getDrawable(this, R.drawable.fabelicon)));
     }
 
     private void MQTTConnect() {
@@ -177,10 +178,23 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Topic: " + topic + "\t|\t" + "Message: " + message.toString());
 
                 if (topic.equals("esstelstrijd/users/" + User.getID() + "/points")) {
-                    Toast toastPoints = Toast.makeText(getApplication().getBaseContext(), "Score bijgewerkt.", Toast.LENGTH_SHORT);
-                    toastPoints.show();
+//                    Toast toastPoints = Toast.makeText(getApplication().getBaseContext(), "Score bijgewerkt.", Toast.LENGTH_SHORT);
+//                    toastPoints.show();
                     int points = parseInt(message.toString());
                     user.setPoints(points);
+                    switch (User.getLand().getName()) {
+                        case "Legendeland":
+                            Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicLegendelandPoints, String.valueOf(LeaderboardActivity.legendeland + 1));
+                            break;
+
+                        case "Fabelwoud":
+                            Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicFabelwoudPoints, String.valueOf(LeaderboardActivity.fabelwoud + 1));
+                            break;
+
+                        case "Stoerland":
+                            Messenger.publishRetainingMessage(Settings.mqttAndroidClient, Settings.topicStoerlandPoints, String.valueOf(LeaderboardActivity.stoerland + 1));
+                            break;
+                    }
                 }
 
                 switch (topic) {
